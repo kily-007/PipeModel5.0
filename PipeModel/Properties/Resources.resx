@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="SID_AUTO_ZERO" xml:space="preserve">
+    <value>AutoZero</value>
+  </data>
+  <data name="SID_CHANGE_ACTIVE_PROGRAM" xml:space="preserve">
+    <value>ChangeActiveProgram</value>
+  </data>
+  <data name="SID_CHECK_MEMORY_ACCESS" xml:space="preserve">
+    <value>CheckMemoryAccess</value>
+  </data>
+  <data name="SID_CLEAR_ERROR" xml:space="preserve">
+    <value>ClearError</value>
+  </data>
+  <data name="SID_CLEAR_MEMORY" xml:space="preserve">
+    <value>ClearMemory</value>
+  </data>
+  <data name="SID_COMM_CLOSE" xml:space="preserve">
+    <value>CommClose</value>
+  </data>
+  <data name="SID_COMPRESS_X_2" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="SID_COMPRESS_X_4" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="SID_COMPRESS_X_OFF" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+  <data name="SID_ETHERNET_OPEN" xml:space="preserve">
+    <value>EthernetOpen</value>
+  </data>
+  <data name="SID_FINALIZE" xml:space="preserve">
+    <value>Finalize</value>
+  </data>
+  <data name="SID_GET_ACTIVE_PROGRAM" xml:space="preserve">
+    <value>GetActiveProgram</value>
+  </data>
+  <data name="SID_GET_BATCH_PROFILE" xml:space="preserve">
+    <value>GetBatchProfile</value>
+  </data>
+  <data name="SID_GET_BATCH_PROFILE_ADVANCE" xml:space="preserve">
+    <value>GetBatchProfileAdvance</value>
+  </data>
+  <data name="SID_GET_ERROR" xml:space="preserve">
+    <value>GetError</value>
+  </data>
+  <data name="SID_GET_MEASUREMENT_VALUE" xml:space="preserve">
+    <value>GetMeasurementValue</value>
+  </data>
+  <data name="SID_GET_PROFILE" xml:space="preserve">
+    <value>GetProfile</value>
+  </data>
+  <data name="SID_GET_PROFILE_ADVANCE" xml:space="preserve">
+    <value>GetProfileAdvance</value>
+  </data>
+  <data name="SID_GET_SETTING" xml:space="preserve">
+    <value>GetSetting</value>
+  </data>
+  <data name="SID_GET_SETTING_FILE" xml:space="preserve">
+    <value>Save to the configuration file</value>
+  </data>
+  <data name="SID_GET_STORAGE_BATCH_PROFILE" xml:space="preserve">
+    <value>GetStorageBatchProfile</value>
+  </data>
+  <data name="SID_GET_STORAGE_DATA" xml:space="preserve">
+    <value>GetStorageData</value>
+  </data>
+  <data name="SID_GET_STORAGE_PROFILE" xml:space="preserve">
+    <value>GetStorageProfile</value>
+  </data>
+  <data name="SID_GET_STORAGE_STATUS" xml:space="preserve">
+    <value>GetStorageStatus</value>
+  </data>
+  <data name="SID_GET_TIME" xml:space="preserve">
+    <value>GetTime</value>
+  </data>
+  <data name="SID_GET_VERSION" xml:space="preserve">
+    <value>GetVersion</value>
+  </data>
+  <data name="SID_HIGH_SPEED_DATA_COMMUNICATION_FINALIZE" xml:space="preserve">
+    <value>HighSpeedData CommunicationFinalize</value>
+  </data>
+  <data name="SID_HIGH_SPEED_DATA_ETHERNET_COMMUNICATION_INITALIZE" xml:space="preserve">
+    <value>HighSpeedDataEthernet CommunicationInitalize</value>
+  </data>
+  <data name="SID_HIGH_SPEED_DATA_USB_COMMUNICATION_INITALIZE" xml:space="preserve">
+    <value>HighSpeedDataUSB CommunicationInitalize</value>
+  </data>
+  <data name="SID_INITIALIZE" xml:space="preserve">
+    <value>Initialize</value>
+  </data>
+  <data name="SID_INITIALIZE_SETTING" xml:space="preserve">
+    <value>InitializeSetting</value>
+  </data>
+  <data name="SID_LOG_FORMAT" xml:space="preserve">
+    <value>[{0}] : {1}(0x{2:x4})</value>
+  </data>
+  <data name="SID_MEASURE_RANGE_FULL" xml:space="preserve">
+    <value>FULL</value>
+  </data>
+  <data name="SID_MEASURE_RANGE_MIDDLE" xml:space="preserve">
+    <value>MIDDLE</value>
+  </data>
+  <data name="SID_MEASURE_RANGE_SMALL" xml:space="preserve">
+    <value>SMALL</value>
+  </data>
+  <data name="SID_NOT_DEFINE_FROMAT" xml:space="preserve">
+    <value>＃Undefined RC (0x{0,0:X4})</value>
+  </data>
+  <data name="SID_PRE_START_HIGH_SPEED_DATA_COMMUNICATION" xml:space="preserve">
+    <value>PreStartHighSpeedData Communication</value>
+  </data>
+  <data name="SID_RC_ERR_NOMEMORY" xml:space="preserve">
+    <value>No free space</value>
+  </data>
+  <data name="SID_RC_ERR_NOTIMPL" xml:space="preserve">
+    <value>Unimplemented Error</value>
+  </data>
+  <data name="SID_RC_ERR_NO_DEVICE" xml:space="preserve">
+    <value>Device not open</value>
+  </data>
+  <data name="SID_RC_ERR_OPEN_DEVICE" xml:space="preserve">
+    <value>Failed to open the device</value>
+  </data>
+  <data name="SID_RC_ERR_PARAMETER" xml:space="preserve">
+    <value>Parameter error</value>
+  </data>
+  <data name="SID_RC_ERR_RECEIVE" xml:space="preserve">
+    <value>Response reception error</value>
+  </data>
+  <data name="SID_RC_ERR_SEND" xml:space="preserve">
+    <value>Command send error</value>
+  </data>
+  <data name="SID_RC_ERR_TIMEOUT" xml:space="preserve">
+    <value>Time out</value>
+  </data>
+  <data name="SID_RC_ERR_UNKNOWN" xml:space="preserve">
+    <value>Undefined error</value>
+  </data>
+  <data name="SID_RC_FORMAT" xml:space="preserve">
+    <value>　　-&gt; {0}</value>
+  </data>
+  <data name="SID_RC_OK" xml:space="preserve">
+    <value>Normal termination</value>
+  </data>
+  <data name="SID_REBOOT_CONTROLLER" xml:space="preserve">
+    <value>RebootController</value>
+  </data>
+  <data name="SID_RECEIVED_BINNING_OFF" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+  <data name="SID_RECEIVED_BINNING_ON" xml:space="preserve">
+    <value>ON</value>
+  </data>
+  <data name="SID_REFLECT_SETTING" xml:space="preserve">
+    <value>ReflectSetting</value>
+  </data>
+  <data name="SID_REQUEST_STORAGE" xml:space="preserve">
+    <value>Manual storage request</value>
+  </data>
+  <data name="SID_RESET" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="SID_RESULT_NG" xml:space="preserve">
+    <value>NG</value>
+  </data>
+  <data name="SID_RESULT_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="SID_RETRUN_TO_FACTORY_SETTING" xml:space="preserve">
+    <value>RetrunToFactorySetting</value>
+  </data>
+  <data name="SID_REWRITE_TEMPORARY_SETTING" xml:space="preserve">
+    <value>RewriteTemporarySetting</value>
+  </data>
+  <data name="SID_SET_SETTING" xml:space="preserve">
+    <value>SetSetting</value>
+  </data>
+  <data name="SID_SET_SETTING_FILE" xml:space="preserve">
+    <value>Read from the configuration file</value>
+  </data>
+  <data name="SID_SET_TIME" xml:space="preserve">
+    <value>SetTime</value>
+  </data>
+  <data name="SID_START_HIGH_SPEED_DATA_COMMUNICATION" xml:space="preserve">
+    <value>StartHighSpeedData Communication</value>
+  </data>
+  <data name="SID_START_MEASURE" xml:space="preserve">
+    <value>StartMeasure</value>
+  </data>
+  <data name="SID_START_STORAGE" xml:space="preserve">
+    <value>StartStorage</value>
+  </data>
+  <data name="SID_STOP_HIGH_SPEED_DATA_COMMUNICATION" xml:space="preserve">
+    <value>StopHighSpeedData Communication</value>
+  </data>
+  <data name="SID_STOP_MEASURE" xml:space="preserve">
+    <value>StopMeasure</value>
+  </data>
+  <data name="SID_STOP_STORAGE" xml:space="preserve">
+    <value>StopStorage</value>
+  </data>
+  <data name="SID_TIMING" xml:space="preserve">
+    <value>Timing</value>
+  </data>
+  <data name="SID_TRIGGER" xml:space="preserve">
+    <value>Trigger</value>
+  </data>
+  <data name="SID_UPDATA_SETTING" xml:space="preserve">
+    <value>ReflectSetting</value>
+  </data>
+  <data name="SID_USB_OPEN" xml:space="preserve">
+    <value>UsbOpen</value>
+  </data>
+</root>
