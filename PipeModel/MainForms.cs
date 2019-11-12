@@ -142,6 +142,12 @@ namespace PipeModel
         private Queue<int[]> _queue3DCurrentData = new Queue<int[]>(Define.QUEUE3D_LENGTH);
         /// <summary> 扫描次数 </summary>
         public static int _countScan = 0;
+        /// <summary> 记录衔接处扫描次数 </summary>
+        public static int _countF = 0;
+        /// <summary> 记录单根灌道扫描次数 </summary>
+        public static int _countG = 0;
+        /// <summary> 记录灌道根数 </summary>
+        public static int _countSing = 0;
         /// <summary> 保存地址 </summary>
         public static string _defaultSavePath = @"E:\pipeModel";
         /// <summary> 纠偏补正参数 </summary>
@@ -158,6 +164,8 @@ namespace PipeModel
         public static string _binFileDataTime = "";
         /// <summary>历史数据查询表头 </summary>
         public static string[] _historyDataTableHead = { "序号","时间", "报表文件", "文件大小","原始数据","操作"};
+        /// <summary>实时扫描信息表头 </summary>
+        public static string[] _scanInfoDataTableHead = { "类型","长度", "横向错位", "纵向错位"};
         /// <summary>历史数据查询表表按钮名/txt </summary>
         private static readonly string[] historyTableBtnText = new string[4] { "导出", "删除", "生成", "原始数据" };
         private static readonly string[] historyTableBtnName = new string[4] { "btnExportReport", "btnDelete", "btnMakeReport", "btnDataBack" };
@@ -202,8 +210,9 @@ namespace PipeModel
         }
 
         #endregion
-        
 
+
+        int index = 0;
         public MainForms()
         {
             //WindowState = FormWindowState.Maximized;   //最大化
@@ -212,9 +221,9 @@ namespace PipeModel
             LoadSkin("office2007.ssk");//初始化皮肤
             InitChart_Profile();//初始化轮廓实时图
             InitChart_Vertical();//初始化Z方向实时图
-            chart_Profile.Visible = false;
-            chart_Vertical.Visible = false;
-            wb_Profile.Visible = true;
+            chart_Profile.Visible = true;
+            chart_Vertical.Visible = true;
+            wb_Profile.Visible = false;
 
             //添加历史数据表头
             for (int i = 0; i < _historyDataTableHead.Length-1; i++)
@@ -224,7 +233,31 @@ namespace PipeModel
                 dgv_historyDataTable.Columns.Add(txtClum);
             }
 
-            
+            //添加实时扫描信息表头
+            for (int i = 0; i < _scanInfoDataTableHead.Length; i++)
+            {
+                DataGridViewTextBoxColumn txtClum = new DataGridViewTextBoxColumn();
+                txtClum.HeaderText = _scanInfoDataTableHead[i];
+                dgv_scanInfoDataTable.Columns.Add(txtClum);
+                txtClum.Width = 90;
+                dgv_scanInfoDataTable.Font = new Font("宋体",11);
+            }
+
+            index = dgv_scanInfoDataTable.Rows.Add();
+            dgv_scanInfoDataTable.Rows[index].Cells[0].Value = _countSing+"灌道▅";
+            dgv_scanInfoDataTable.Rows[index].Cells[1].Value = 0;
+            dgv_scanInfoDataTable.Rows[index].Cells[2].Value = "*";
+            dgv_scanInfoDataTable.Rows[index].Cells[3].Value = "*";
+
+            //初始化实时扫描信息队列
+            for (int i = 0; i < 10; i++)
+            {
+                int[] temp = new int[3] { 0,0,0};
+                misaQueue.Enqueue(temp);
+            }
+
+
+
             dgv_historyDataTable.Columns[0].Width = 60;
             dgv_historyDataTable.Columns[1].Width = 150;
             dgv_historyDataTable.Columns[2].Width = 210;
@@ -328,6 +361,17 @@ namespace PipeModel
                 }
             }
         }
+
+        /// <summary>
+        /// 初始化实时扫描信息表格
+        /// </summary>
+        public void InitScanInfoDataTable()
+        {
+            
+        }
+
+
+
 
         /// <summary>
         /// 响应历史数据查询表中按钮点击事件
@@ -1209,6 +1253,30 @@ namespace PipeModel
         }
 
 
+        ///// <summary>
+        ///// 断开设备连接
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void 断开连接ToolStripMenuItem1_Click(object sender, EventArgs e)
+        //{
+        //    int rc = NativeMethods.LJV7IF_CommClose(_currentDeviceId);
+        //    AddLogResult(rc, Resources.SID_COMM_CLOSE);
+        //    if (rc == (int)Rc.Ok)
+        //    {
+        //        PrintLog("[USB断开]:OK(0x0000) 设备断开成功.");
+        //        StopHightSpeedScan();
+        //    }
+        //    else
+        //    {
+        //        PrintLog("[USB断开]:NG(0x1000) 设备断开失败");
+        //    }
+
+        //    _deviceData[_currentDeviceId].Status = DeviceStatus.NoConnection;
+        //    _deviceStatusLabels[_currentDeviceId].Text = _deviceData[_currentDeviceId].GetStatusString();
+        //}
+
+
         /// <summary>
         /// 单次扫描
         /// </summary>
@@ -1408,8 +1476,7 @@ namespace PipeModel
             // Start high-speed data communication.
             rc = (Rc)NativeMethods.LJV7IF_StartHighSpeedDataCommunication(Define.DEVICE_ID);
             if (rc != Rc.Ok) return false;
-
-            _lblReceiveProfileCount.Text = "0";
+            
             _sendCommand = SendCommand.StartHighSpeedDataCommunication;
             _timerHighSpeed.Start();
             return true;
@@ -1449,11 +1516,6 @@ namespace PipeModel
         }
         
 
-
-
-
-
-
         /// <summary>
         /// Timer event handler
         /// </summary>
@@ -1473,7 +1535,7 @@ namespace PipeModel
                 }
 
                 ProfileDataAnalysis.DealWithHightProfileData(data);//数据解析
-                if (drawShap == View.HightSpeed)
+                if (drawShap == View.HightSpeed)//绘制x轴扫描轮廓
                 {
 
                     if (_correctionEd)
@@ -1481,15 +1543,14 @@ namespace PipeModel
                     //绘制x轴扫描轮廓
                     if (_updateChartData)
                         DrawHightProfile(data[0],k);
-                    //int[] dataVertical = DealWithVerticalProfileData(data[0]);
-                    ////
-                    //if(_updateChartData)
-                    //    DrawVerticalProfile(dataVertical);
+                    int[] dataVertical = DealWithVerticalProfileData(data);
+                    if (_updateChartData)
+                        DrawVerticalProfile(dataVertical);
 
                 }
-                else if (drawShap == View.HightSpeed2D)
+                else if (drawShap == View.HightSpeed2D)//绘制2D图
                 {
-                    //绘制2D图
+                    
                     DealWithHightData2D(data);
                     if (_updateChartData)
                         DrawHight2DProfile();
@@ -1498,7 +1559,7 @@ namespace PipeModel
                     if (_updateChartData)
                         DrawVerticalProfile(dataVertical);
                 }
-                else if (drawShap == View.HightSpeed3D)
+                else if (drawShap == View.HightSpeed3D)//绘制3D图
                 {
 
                 }
@@ -1510,11 +1571,11 @@ namespace PipeModel
                     {
                         PrintLog("[存储高速扫描数据]:NG(0x1000) 存储异常.");
                     }
+
                     MisalignedScan.MisalignedAnalizeData(data);//数据分析入库
+                    MisalignedScanInfo(data);
 
-                   
-
-                    _lblReceiveProfileCount.Text = (_countScan += data.Count).ToString();
+                    _countScan += data.Count;
                     _lblReceiveProfileCount0.Text = _countScan.ToString();
                     lb_status.Text = "状态：扫描中 " + _startBinDataTime + "-" + DateTime.Now.ToLongTimeString().ToString();
                 }
@@ -1534,7 +1595,93 @@ namespace PipeModel
             }
         }
 
-      
+        ///做缓存，存储计算值，供实时计算
+        private static Queue<int[]> misaQueue = new Queue<int[]>(10);//1KHZ ，200帧一个list，缓存10个list，即为2秒数据
+        
+
+
+        //实时计算缝隙与错位
+        public void MisalignedScanInfo(List<int[]> datas)
+        {
+            for (int i = 0; i < datas.Count; i++)
+            {
+                int leftTx = 6;
+                int rightTx = 806;
+                int[] info = new int[3];
+                while (leftTx < rightTx && datas[i][leftTx] == Define.INVALID_DATA_ORIGINAL) leftTx++;
+                while (leftTx < rightTx && datas[i][rightTx] == Define.INVALID_DATA_ORIGINAL) rightTx--;
+                //灌道
+                if (rightTx - leftTx > 300)
+                {
+                    
+                    info[0] = leftTx;
+                    for (int j = (leftTx+rightTx)/2; j < (leftTx + rightTx) / 2+10; j++)
+                    {
+                        info[1] += datas[i][j];
+                    }
+                    info[1] /= 10;
+                    info[2] = rightTx;
+                    misaQueue.Dequeue();
+                    misaQueue.Enqueue(info);
+
+                    //刚过完衔接缝
+                    if (_countF != 0)
+                    {
+                        //计算上根灌道与该灌道的错位参数
+                        int[][] temp = misaQueue.ToArray();
+                        //求均值
+                        int misaX = 0;
+                        int misaY = 0;
+                        for (int j = 0; j < temp.Length; j++)
+                        {
+                            misaX += temp[j][0];
+                            misaY += temp[j][1];
+                        }
+                        misaX /= temp.Length;
+                        misaY /= temp.Length;
+                        misaX -= info[0];
+                        misaY -= info[1];
+                        dgv_scanInfoDataTable.Rows[index].Cells[2].Value = Math.Abs(misaX * Define.XLEN) +"mm";
+                        dgv_scanInfoDataTable.Rows[index].Cells[3].Value = Math.Abs(misaY) +"mm";
+
+
+                        _countF = 0;
+                        index = dgv_scanInfoDataTable.Rows.Add();
+                        dgv_scanInfoDataTable.Rows[index].Cells[0].Value = _countSing+"灌道▅";
+                        dgv_scanInfoDataTable.Rows[index].Cells[1].Value = 0;
+                        dgv_scanInfoDataTable.Rows[index].Cells[2].Value = "";
+                        dgv_scanInfoDataTable.Rows[index].Cells[3].Value = "";
+                    }
+
+                    //更新灌道里程
+                    _countG++;
+                    dgv_scanInfoDataTable.Rows[index].Cells[1].Value = _countG * (Define.V/ Define.F)+"m";
+                    
+                }
+                //衔接缝
+                else{
+                    //刚过完灌道
+                    if (_countF == 0)
+                    {
+                        //灌道数+1
+                        _countSing++;
+                        //将上根灌道扫描次数置零
+                        _countG = 0;
+                        index = dgv_scanInfoDataTable.Rows.Add();
+                        dgv_scanInfoDataTable.Rows[index].Cells[0].Value = "衔接缝隙";
+                        dgv_scanInfoDataTable.Rows[index].Cells[1].Value = 0;
+                        dgv_scanInfoDataTable.Rows[index].Cells[2].Value = 0;
+                        dgv_scanInfoDataTable.Rows[index].Cells[3].Value = 0;
+                    }
+                    //更新衔接缝里程
+                    _countF++;
+                    dgv_scanInfoDataTable.Rows[index].Cells[1].Value = _countF * (Define.V / Define.F)*1000 + "mm";
+                }
+            }
+        }
+
+
+
 
         /// <summary>
         /// z轴数据处理
@@ -1625,7 +1772,6 @@ namespace PipeModel
 
         private void btn_ResetScanCount_Click(object sender, EventArgs e)
         {
-            _lblReceiveProfileCount.Text = "0";
             _countScan = 0;
         }
 
@@ -2019,6 +2165,10 @@ namespace PipeModel
         {
             string skinPath = Application.StartupPath + "\\Skins\\";
             skinEngine.SkinFile = skinPath+cb_selectSkin.SelectedItem.ToString();
+        }
+
+        private void 显示ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
         }
     }
 }

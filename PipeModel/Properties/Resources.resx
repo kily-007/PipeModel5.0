@@ -112,205 +112,67 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="SID_AUTO_ZERO" xml:space="preserve">
-    <value>AutoZero</value>
-  </data>
-  <data name="SID_CHANGE_ACTIVE_PROGRAM" xml:space="preserve">
-    <value>ChangeActiveProgram</value>
-  </data>
-  <data name="SID_CHECK_MEMORY_ACCESS" xml:space="preserve">
-    <value>CheckMemoryAccess</value>
-  </data>
-  <data name="SID_CLEAR_ERROR" xml:space="preserve">
-    <value>ClearError</value>
-  </data>
-  <data name="SID_CLEAR_MEMORY" xml:space="preserve">
-    <value>ClearMemory</value>
-  </data>
-  <data name="SID_COMM_CLOSE" xml:space="preserve">
-    <value>CommClose</value>
-  </data>
   <data name="SID_COMPRESS_X_2" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="SID_COMPRESS_X_4" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="SID_COMPRESS_X_OFF" xml:space="preserve">
-    <value>OFF</value>
-  </data>
-  <data name="SID_ETHERNET_OPEN" xml:space="preserve">
-    <value>EthernetOpen</value>
-  </data>
-  <data name="SID_FINALIZE" xml:space="preserve">
-    <value>Finalize</value>
-  </data>
-  <data name="SID_GET_ACTIVE_PROGRAM" xml:space="preserve">
-    <value>GetActiveProgram</value>
-  </data>
-  <data name="SID_GET_BATCH_PROFILE" xml:space="preserve">
-    <value>GetBatchProfile</value>
-  </data>
-  <data name="SID_GET_BATCH_PROFILE_ADVANCE" xml:space="preserve">
-    <value>GetBatchProfileAdvance</value>
-  </data>
-  <data name="SID_GET_ERROR" xml:space="preserve">
-    <value>GetError</value>
-  </data>
-  <data name="SID_GET_MEASUREMENT_VALUE" xml:space="preserve">
-    <value>GetMeasurementValue</value>
-  </data>
-  <data name="SID_GET_PROFILE" xml:space="preserve">
-    <value>GetProfile</value>
-  </data>
-  <data name="SID_GET_PROFILE_ADVANCE" xml:space="preserve">
-    <value>GetProfileAdvance</value>
-  </data>
-  <data name="SID_GET_SETTING" xml:space="preserve">
-    <value>GetSetting</value>
-  </data>
-  <data name="SID_GET_SETTING_FILE" xml:space="preserve">
-    <value>Save to the configuration file</value>
-  </data>
-  <data name="SID_GET_STORAGE_BATCH_PROFILE" xml:space="preserve">
-    <value>GetStorageBatchProfile</value>
-  </data>
-  <data name="SID_GET_STORAGE_DATA" xml:space="preserve">
-    <value>GetStorageData</value>
-  </data>
-  <data name="SID_GET_STORAGE_PROFILE" xml:space="preserve">
-    <value>GetStorageProfile</value>
-  </data>
-  <data name="SID_GET_STORAGE_STATUS" xml:space="preserve">
-    <value>GetStorageStatus</value>
-  </data>
-  <data name="SID_GET_TIME" xml:space="preserve">
-    <value>GetTime</value>
-  </data>
-  <data name="SID_GET_VERSION" xml:space="preserve">
-    <value>GetVersion</value>
   </data>
   <data name="SID_HIGH_SPEED_DATA_COMMUNICATION_FINALIZE" xml:space="preserve">
     <value>HighSpeedData CommunicationFinalize</value>
   </data>
-  <data name="SID_HIGH_SPEED_DATA_ETHERNET_COMMUNICATION_INITALIZE" xml:space="preserve">
-    <value>HighSpeedDataEthernet CommunicationInitalize</value>
+  <data name="SID_RC_ERR_NO_DEVICE" xml:space="preserve">
+    <value>Device not open</value>
   </data>
-  <data name="SID_HIGH_SPEED_DATA_USB_COMMUNICATION_INITALIZE" xml:space="preserve">
-    <value>HighSpeedDataUSB CommunicationInitalize</value>
-  </data>
-  <data name="SID_INITIALIZE" xml:space="preserve">
-    <value>Initialize</value>
-  </data>
-  <data name="SID_INITIALIZE_SETTING" xml:space="preserve">
-    <value>InitializeSetting</value>
-  </data>
-  <data name="SID_LOG_FORMAT" xml:space="preserve">
-    <value>[{0}] : {1}(0x{2:x4})</value>
-  </data>
-  <data name="SID_MEASURE_RANGE_FULL" xml:space="preserve">
-    <value>FULL</value>
-  </data>
-  <data name="SID_MEASURE_RANGE_MIDDLE" xml:space="preserve">
-    <value>MIDDLE</value>
-  </data>
-  <data name="SID_MEASURE_RANGE_SMALL" xml:space="preserve">
-    <value>SMALL</value>
-  </data>
-  <data name="SID_NOT_DEFINE_FROMAT" xml:space="preserve">
-    <value>＃Undefined RC (0x{0,0:X4})</value>
-  </data>
-  <data name="SID_PRE_START_HIGH_SPEED_DATA_COMMUNICATION" xml:space="preserve">
-    <value>PreStartHighSpeedData Communication</value>
+  <data name="SID_GET_TIME" xml:space="preserve">
+    <value>GetTime</value>
   </data>
   <data name="SID_RC_ERR_NOMEMORY" xml:space="preserve">
     <value>No free space</value>
   </data>
-  <data name="SID_RC_ERR_NOTIMPL" xml:space="preserve">
-    <value>Unimplemented Error</value>
+  <data name="SID_LOG_FORMAT" xml:space="preserve">
+    <value>[{0}] : {1}(0x{2:x4})</value>
   </data>
-  <data name="SID_RC_ERR_NO_DEVICE" xml:space="preserve">
-    <value>Device not open</value>
-  </data>
-  <data name="SID_RC_ERR_OPEN_DEVICE" xml:space="preserve">
-    <value>Failed to open the device</value>
-  </data>
-  <data name="SID_RC_ERR_PARAMETER" xml:space="preserve">
-    <value>Parameter error</value>
-  </data>
-  <data name="SID_RC_ERR_RECEIVE" xml:space="preserve">
-    <value>Response reception error</value>
-  </data>
-  <data name="SID_RC_ERR_SEND" xml:space="preserve">
-    <value>Command send error</value>
-  </data>
-  <data name="SID_RC_ERR_TIMEOUT" xml:space="preserve">
-    <value>Time out</value>
-  </data>
-  <data name="SID_RC_ERR_UNKNOWN" xml:space="preserve">
-    <value>Undefined error</value>
-  </data>
-  <data name="SID_RC_FORMAT" xml:space="preserve">
-    <value>　　-&gt; {0}</value>
-  </data>
-  <data name="SID_RC_OK" xml:space="preserve">
-    <value>Normal termination</value>
-  </data>
-  <data name="SID_REBOOT_CONTROLLER" xml:space="preserve">
-    <value>RebootController</value>
-  </data>
-  <data name="SID_RECEIVED_BINNING_OFF" xml:space="preserve">
+  <data name="SID_COMPRESS_X_OFF" xml:space="preserve">
     <value>OFF</value>
   </data>
-  <data name="SID_RECEIVED_BINNING_ON" xml:space="preserve">
-    <value>ON</value>
-  </data>
-  <data name="SID_REFLECT_SETTING" xml:space="preserve">
-    <value>ReflectSetting</value>
-  </data>
-  <data name="SID_REQUEST_STORAGE" xml:space="preserve">
-    <value>Manual storage request</value>
-  </data>
-  <data name="SID_RESET" xml:space="preserve">
-    <value>Reset</value>
+  <data name="SID_GET_SETTING" xml:space="preserve">
+    <value>GetSetting</value>
   </data>
   <data name="SID_RESULT_NG" xml:space="preserve">
     <value>NG</value>
   </data>
-  <data name="SID_RESULT_OK" xml:space="preserve">
-    <value>OK</value>
+  <data name="SID_SET_TIME" xml:space="preserve">
+    <value>SetTime</value>
+  </data>
+  <data name="SID_GET_ACTIVE_PROGRAM" xml:space="preserve">
+    <value>GetActiveProgram</value>
+  </data>
+  <data name="SID_GET_SETTING_FILE" xml:space="preserve">
+    <value>Save to the configuration file</value>
   </data>
   <data name="SID_RETRUN_TO_FACTORY_SETTING" xml:space="preserve">
     <value>RetrunToFactorySetting</value>
   </data>
-  <data name="SID_REWRITE_TEMPORARY_SETTING" xml:space="preserve">
-    <value>RewriteTemporarySetting</value>
+  <data name="SID_RECEIVED_BINNING_ON" xml:space="preserve">
+    <value>ON</value>
   </data>
-  <data name="SID_SET_SETTING" xml:space="preserve">
-    <value>SetSetting</value>
+  <data name="SID_RC_ERR_TIMEOUT" xml:space="preserve">
+    <value>Time out</value>
   </data>
-  <data name="SID_SET_SETTING_FILE" xml:space="preserve">
-    <value>Read from the configuration file</value>
-  </data>
-  <data name="SID_SET_TIME" xml:space="preserve">
-    <value>SetTime</value>
-  </data>
-  <data name="SID_START_HIGH_SPEED_DATA_COMMUNICATION" xml:space="preserve">
-    <value>StartHighSpeedData Communication</value>
-  </data>
-  <data name="SID_START_MEASURE" xml:space="preserve">
-    <value>StartMeasure</value>
+  <data name="SID_CHANGE_ACTIVE_PROGRAM" xml:space="preserve">
+    <value>ChangeActiveProgram</value>
   </data>
   <data name="SID_START_STORAGE" xml:space="preserve">
     <value>StartStorage</value>
   </data>
-  <data name="SID_STOP_HIGH_SPEED_DATA_COMMUNICATION" xml:space="preserve">
-    <value>StopHighSpeedData Communication</value>
+  <data name="SID_GET_MEASUREMENT_VALUE" xml:space="preserve">
+    <value>GetMeasurementValue</value>
+  </data>
+  <data name="SID_REWRITE_TEMPORARY_SETTING" xml:space="preserve">
+    <value>RewriteTemporarySetting</value>
   </data>
   <data name="SID_STOP_MEASURE" xml:space="preserve">
     <value>StopMeasure</value>
@@ -318,16 +180,158 @@
   <data name="SID_STOP_STORAGE" xml:space="preserve">
     <value>StopStorage</value>
   </data>
-  <data name="SID_TIMING" xml:space="preserve">
-    <value>Timing</value>
+  <data name="SID_HIGH_SPEED_DATA_ETHERNET_COMMUNICATION_INITALIZE" xml:space="preserve">
+    <value>HighSpeedDataEthernet CommunicationInitalize</value>
   </data>
-  <data name="SID_TRIGGER" xml:space="preserve">
-    <value>Trigger</value>
+  <data name="SID_RESET" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="SID_GET_PROFILE" xml:space="preserve">
+    <value>GetProfile</value>
+  </data>
+  <data name="SID_RC_ERR_NOTIMPL" xml:space="preserve">
+    <value>Unimplemented Error</value>
+  </data>
+  <data name="SID_INITIALIZE" xml:space="preserve">
+    <value>Initialize</value>
+  </data>
+  <data name="SID_GET_BATCH_PROFILE_ADVANCE" xml:space="preserve">
+    <value>GetBatchProfileAdvance</value>
+  </data>
+  <data name="SID_AUTO_ZERO" xml:space="preserve">
+    <value>AutoZero</value>
+  </data>
+  <data name="SID_SET_SETTING_FILE" xml:space="preserve">
+    <value>Read from the configuration file</value>
+  </data>
+  <data name="SID_RESULT_OK" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="SID_UPDATA_SETTING" xml:space="preserve">
     <value>ReflectSetting</value>
   </data>
+  <data name="SID_GET_ERROR" xml:space="preserve">
+    <value>GetError</value>
+  </data>
+  <data name="SID_RC_FORMAT" xml:space="preserve">
+    <value>　　-&gt; {0}</value>
+  </data>
+  <data name="SID_ETHERNET_OPEN" xml:space="preserve">
+    <value>EthernetOpen</value>
+  </data>
+  <data name="SID_REQUEST_STORAGE" xml:space="preserve">
+    <value>Manual storage request</value>
+  </data>
+  <data name="SID_START_MEASURE" xml:space="preserve">
+    <value>StartMeasure</value>
+  </data>
+  <data name="SID_RC_ERR_OPEN_DEVICE" xml:space="preserve">
+    <value>Failed to open the device</value>
+  </data>
+  <data name="SID_TIMING" xml:space="preserve">
+    <value>Timing</value>
+  </data>
+  <data name="SID_CLEAR_MEMORY" xml:space="preserve">
+    <value>ClearMemory</value>
+  </data>
+  <data name="SID_CHECK_MEMORY_ACCESS" xml:space="preserve">
+    <value>CheckMemoryAccess</value>
+  </data>
+  <data name="SID_GET_VERSION" xml:space="preserve">
+    <value>GetVersion</value>
+  </data>
+  <data name="SID_GET_STORAGE_STATUS" xml:space="preserve">
+    <value>GetStorageStatus</value>
+  </data>
+  <data name="SID_STOP_HIGH_SPEED_DATA_COMMUNICATION" xml:space="preserve">
+    <value>StopHighSpeedData Communication</value>
+  </data>
+  <data name="SID_REBOOT_CONTROLLER" xml:space="preserve">
+    <value>RebootController</value>
+  </data>
+  <data name="SID_INITIALIZE_SETTING" xml:space="preserve">
+    <value>InitializeSetting</value>
+  </data>
+  <data name="SID_COMM_CLOSE" xml:space="preserve">
+    <value>CommClose</value>
+  </data>
+  <data name="SID_MEASURE_RANGE_SMALL" xml:space="preserve">
+    <value>SMALL</value>
+  </data>
+  <data name="SID_RC_ERR_SEND" xml:space="preserve">
+    <value>Command send error</value>
+  </data>
+  <data name="SID_RC_ERR_RECEIVE" xml:space="preserve">
+    <value>Response reception error</value>
+  </data>
+  <data name="SID_GET_STORAGE_DATA" xml:space="preserve">
+    <value>GetStorageData</value>
+  </data>
+  <data name="SID_COMPRESS_X_4" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="SID_NOT_DEFINE_FROMAT" xml:space="preserve">
+    <value>＃Undefined RC (0x{0,0:X4})</value>
+  </data>
+  <data name="SID_MEASURE_RANGE_FULL" xml:space="preserve">
+    <value>FULL</value>
+  </data>
+  <data name="SID_GET_STORAGE_PROFILE" xml:space="preserve">
+    <value>GetStorageProfile</value>
+  </data>
+  <data name="SID_GET_PROFILE_ADVANCE" xml:space="preserve">
+    <value>GetProfileAdvance</value>
+  </data>
   <data name="SID_USB_OPEN" xml:space="preserve">
     <value>UsbOpen</value>
+  </data>
+  <data name="SID_REFLECT_SETTING" xml:space="preserve">
+    <value>ReflectSetting</value>
+  </data>
+  <data name="SID_TRIGGER" xml:space="preserve">
+    <value>Trigger</value>
+  </data>
+  <data name="SID_START_HIGH_SPEED_DATA_COMMUNICATION" xml:space="preserve">
+    <value>StartHighSpeedData Communication</value>
+  </data>
+  <data name="SID_MEASURE_RANGE_MIDDLE" xml:space="preserve">
+    <value>MIDDLE</value>
+  </data>
+  <data name="SID_GET_STORAGE_BATCH_PROFILE" xml:space="preserve">
+    <value>GetStorageBatchProfile</value>
+  </data>
+  <data name="SID_HIGH_SPEED_DATA_USB_COMMUNICATION_INITALIZE" xml:space="preserve">
+    <value>HighSpeedDataUSB CommunicationInitalize</value>
+  </data>
+  <data name="SID_RECEIVED_BINNING_OFF" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+  <data name="SID_PRE_START_HIGH_SPEED_DATA_COMMUNICATION" xml:space="preserve">
+    <value>PreStartHighSpeedData Communication</value>
+  </data>
+  <data name="SID_SET_SETTING" xml:space="preserve">
+    <value>SetSetting</value>
+  </data>
+  <data name="SID_CLEAR_ERROR" xml:space="preserve">
+    <value>ClearError</value>
+  </data>
+  <data name="SID_RC_ERR_UNKNOWN" xml:space="preserve">
+    <value>Undefined error</value>
+  </data>
+  <data name="SID_RC_ERR_PARAMETER" xml:space="preserve">
+    <value>Parameter error</value>
+  </data>
+  <data name="SID_RC_OK" xml:space="preserve">
+    <value>Normal termination</value>
+  </data>
+  <data name="SID_GET_BATCH_PROFILE" xml:space="preserve">
+    <value>GetBatchProfile</value>
+  </data>
+  <data name="SID_FINALIZE" xml:space="preserve">
+    <value>Finalize</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="OK" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\OK.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

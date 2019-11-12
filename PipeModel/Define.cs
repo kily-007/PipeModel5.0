@@ -12,6 +12,27 @@ namespace PipeModel
     {
         #region Constant
 
+        
+
+        ///编码器触发,下列值调整为：
+        /// V=0.6
+        /// F=1000
+        /// <summary>
+        /// 电梯检修速度
+        /// </summary>
+        public const double V = 0.6;//(单位：m/s)
+        /// <summary>
+        /// 触发器出发频率
+        /// </summary>
+        public const double F = 1000;//(单位：HZ)
+
+        /// <summary>
+        ///光点间距
+        /// </summary>
+        public const double XLEN = 0.3;//(单位：mm)
+
+
+
         /// <summary>
         /// Maximum amount of data for 1 profile
         /// </summary>

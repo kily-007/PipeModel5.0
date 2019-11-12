@@ -13,11 +13,6 @@ namespace PipeModel
     /// </summary>
     public static class MisalignedScan
     {
-        ///做缓存，存储计算值，一定数量写进mysql
-        private static List<List<int>> MisaXList = new List<List<int>>();
-        private static List<List<int>> MisaYList = new List<List<int>>();
-        private static List<List<int>> MisaZList = new List<List<int>>();
-
         /// <summary>
         /// 数据分析
         /// </summary>
@@ -60,7 +55,7 @@ namespace PipeModel
                 }
                 else
                 {   //MisaX方向磨损计算
-                    int[] MisaXArray = new int[2] { leftTx - 6, rightTx - 6 };
+                    int[] MisaXArray = new int[2] { leftTx-6, rightTx-6 };
                     MisaX.Add(MisaXArray);
                     //MisaY方向磨损计算0
                     middley = (int)(leftTx + rightTx) / 2;
@@ -76,10 +71,7 @@ namespace PipeModel
                 }
                 
             }
-
             MysqlConnection.executeInsert(MisaX, MisaY, MisaZ, "S");
-            
-           
         }
         
     }

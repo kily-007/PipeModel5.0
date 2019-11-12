@@ -84,7 +84,6 @@ namespace PipeModel.DataAnalysis
                     if (profDatas[i] == Define.INVALID_DATA)
                         profDatas[i] = profDatas[i + 1];
                 }
-
                 dataRs.Add(profDatas);
             }
             return dataRs;
