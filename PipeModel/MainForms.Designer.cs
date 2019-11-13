@@ -32,12 +32,12 @@ namespace PipeModel
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForms));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea17 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend17 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea18 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend18 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.新建ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,6 +78,10 @@ namespace PipeModel
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabControl_View = new System.Windows.Forms.TabControl();
             this.tabPage_View = new System.Windows.Forms.TabPage();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pBox_chart2D = new System.Windows.Forms.PictureBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.dgv_scanInfoDataTable = new System.Windows.Forms.DataGridView();
             this.chart_Profile = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart_Vertical = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.wb_Profile = new System.Windows.Forms.WebBrowser();
@@ -94,12 +98,12 @@ namespace PipeModel
             this.dgv_historyDataTable = new System.Windows.Forms.DataGridView();
             this.label7 = new System.Windows.Forms.Label();
             this.lb_status = new System.Windows.Forms.Label();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.skinEngine = new Sunisoft.IrisSkin.SkinEngine();
             this.cb_selectSkin = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtBox_Log = new System.Windows.Forms.TextBox();
-            this.dgv_scanInfoDataTable = new System.Windows.Forms.DataGridView();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.label9 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this._pnlDeviceId.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -107,14 +111,16 @@ namespace PipeModel
             this.groupBox1.SuspendLayout();
             this.tabControl_View.SuspendLayout();
             this.tabPage_View.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBox_chart2D)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_scanInfoDataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_Profile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_Vertical)).BeginInit();
             this.tabPage_Data.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_historyDataTable)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_scanInfoDataTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -185,21 +191,21 @@ namespace PipeModel
             // usb连接ToolStripMenuItem
             // 
             this.usb连接ToolStripMenuItem.Name = "usb连接ToolStripMenuItem";
-            this.usb连接ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.usb连接ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.usb连接ToolStripMenuItem.Text = "USB连接";
             this.usb连接ToolStripMenuItem.Click += new System.EventHandler(this.USBToolStripMenuItem_Click);
             // 
             // 断开连接ToolStripMenuItem
             // 
             this.断开连接ToolStripMenuItem.Name = "断开连接ToolStripMenuItem";
-            this.断开连接ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.断开连接ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.断开连接ToolStripMenuItem.Text = "网线连接";
             this.断开连接ToolStripMenuItem.Click += new System.EventHandler(this.网线连接ToolStripMenuItem_Click);
             // 
             // 调试ToolStripMenuItem
             // 
             this.调试ToolStripMenuItem.Name = "调试ToolStripMenuItem";
-            this.调试ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.调试ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.调试ToolStripMenuItem.Text = "调试";
             this.调试ToolStripMenuItem.Click += new System.EventHandler(this.调试ToolStripMenuItem_Click_1);
             // 
@@ -320,7 +326,6 @@ namespace PipeModel
             this.显示ToolStripMenuItem1.Name = "显示ToolStripMenuItem1";
             this.显示ToolStripMenuItem1.Size = new System.Drawing.Size(44, 25);
             this.显示ToolStripMenuItem1.Text = "测试";
-            this.显示ToolStripMenuItem1.Click += new System.EventHandler(this.显示ToolStripMenuItem1_Click);
             // 
             // _timerHighSpeed
             // 
@@ -345,7 +350,7 @@ namespace PipeModel
             this._pnlDeviceId.Controls.Add(this._lblDeviceStatus0);
             this._pnlDeviceId.Location = new System.Drawing.Point(6, 20);
             this._pnlDeviceId.Name = "_pnlDeviceId";
-            this._pnlDeviceId.Size = new System.Drawing.Size(315, 80);
+            this._pnlDeviceId.Size = new System.Drawing.Size(255, 80);
             this._pnlDeviceId.TabIndex = 2;
             this._pnlDeviceId.Tag = "";
             // 
@@ -354,9 +359,9 @@ namespace PipeModel
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this._lblReceiveProfileCount0);
-            this.panel1.Location = new System.Drawing.Point(186, 5);
+            this.panel1.Location = new System.Drawing.Point(141, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(126, 72);
+            this.panel1.Size = new System.Drawing.Size(109, 72);
             this.panel1.TabIndex = 59;
             // 
             // label3
@@ -425,7 +430,7 @@ namespace PipeModel
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(12, 440);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(312, 329);
+            this.pictureBox1.Size = new System.Drawing.Size(258, 329);
             this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
             // 
@@ -435,7 +440,7 @@ namespace PipeModel
             this.groupBox1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(6, 50);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(327, 106);
+            this.groupBox1.Size = new System.Drawing.Size(264, 106);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "连接状态";
@@ -445,15 +450,19 @@ namespace PipeModel
             this.tabControl_View.Controls.Add(this.tabPage_View);
             this.tabControl_View.Controls.Add(this.tabPage_Data);
             this.tabControl_View.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tabControl_View.Location = new System.Drawing.Point(339, 28);
+            this.tabControl_View.Location = new System.Drawing.Point(276, 32);
             this.tabControl_View.Name = "tabControl_View";
             this.tabControl_View.SelectedIndex = 0;
-            this.tabControl_View.Size = new System.Drawing.Size(1115, 769);
+            this.tabControl_View.Size = new System.Drawing.Size(1186, 769);
             this.tabControl_View.TabIndex = 18;
             this.tabControl_View.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl_View_MouseClick);
             // 
             // tabPage_View
             // 
+            this.tabPage_View.Controls.Add(this.pictureBox3);
+            this.tabPage_View.Controls.Add(this.pBox_chart2D);
+            this.tabPage_View.Controls.Add(this.label9);
+            this.tabPage_View.Controls.Add(this.label8);
             this.tabPage_View.Controls.Add(this.dgv_scanInfoDataTable);
             this.tabPage_View.Controls.Add(this.chart_Profile);
             this.tabPage_View.Controls.Add(this.chart_Vertical);
@@ -461,56 +470,81 @@ namespace PipeModel
             this.tabPage_View.Location = new System.Drawing.Point(4, 26);
             this.tabPage_View.Name = "tabPage_View";
             this.tabPage_View.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_View.Size = new System.Drawing.Size(1107, 739);
+            this.tabPage_View.Size = new System.Drawing.Size(1178, 739);
             this.tabPage_View.TabIndex = 0;
             this.tabPage_View.Text = "实时显示";
             this.tabPage_View.UseVisualStyleBackColor = true;
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::PipeModel.Properties.Resources.all;
+            this.pictureBox3.Location = new System.Drawing.Point(0, 457);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(121, 65);
+            this.pictureBox3.TabIndex = 26;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pBox_chart2D
+            // 
+            this.pBox_chart2D.Image = global::PipeModel.Properties.Resources.line;
+            this.pBox_chart2D.Location = new System.Drawing.Point(0, 56);
+            this.pBox_chart2D.Name = "pBox_chart2D";
+            this.pBox_chart2D.Size = new System.Drawing.Size(121, 131);
+            this.pBox_chart2D.TabIndex = 26;
+            this.pBox_chart2D.TabStop = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(0, 37);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(104, 16);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "扫描线示意图";
+            // 
+            // dgv_scanInfoDataTable
+            // 
+            this.dgv_scanInfoDataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_scanInfoDataTable.Location = new System.Drawing.Point(810, 11);
+            this.dgv_scanInfoDataTable.Name = "dgv_scanInfoDataTable";
+            this.dgv_scanInfoDataTable.RowHeadersVisible = false;
+            this.dgv_scanInfoDataTable.RowTemplate.Height = 23;
+            this.dgv_scanInfoDataTable.Size = new System.Drawing.Size(365, 715);
+            this.dgv_scanInfoDataTable.TabIndex = 2;
+            // 
             // chart_Profile
             // 
-            this.chart_Profile.BackColor = System.Drawing.Color.Transparent;
-            chartArea17.Area3DStyle.Enable3D = true;
-            chartArea17.Area3DStyle.WallWidth = 0;
-            chartArea17.BackColor = System.Drawing.Color.Gainsboro;
-            chartArea17.BackImageAlignment = System.Windows.Forms.DataVisualization.Charting.ChartImageAlignmentStyle.BottomLeft;
-            chartArea17.BackImageTransparentColor = System.Drawing.Color.White;
-            chartArea17.BorderColor = System.Drawing.Color.Transparent;
-            chartArea17.Name = "C_SingleProfile";
-            chartArea17.Position.Auto = false;
-            chartArea17.Position.Height = 100F;
-            chartArea17.Position.Width = 100F;
-            this.chart_Profile.ChartAreas.Add(chartArea17);
-            legend17.Name = "Legend1";
-            this.chart_Profile.Legends.Add(legend17);
-            this.chart_Profile.Location = new System.Drawing.Point(5, 5);
-            this.chart_Profile.Margin = new System.Windows.Forms.Padding(2);
+            chartArea11.Name = "ChartArea1";
+            this.chart_Profile.ChartAreas.Add(chartArea11);
+            legend11.Name = "Legend1";
+            this.chart_Profile.Legends.Add(legend11);
+            this.chart_Profile.Location = new System.Drawing.Point(127, 11);
             this.chart_Profile.Name = "chart_Profile";
-            series17.ChartArea = "C_SingleProfile";
-            series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series17.Legend = "Legend1";
-            series17.Name = "S_SingleProfile";
-            this.chart_Profile.Series.Add(series17);
-            this.chart_Profile.Size = new System.Drawing.Size(728, 390);
-            this.chart_Profile.TabIndex = 8;
-            this.chart_Profile.Text = "chart";
+            series11.ChartArea = "ChartArea1";
+            series11.Legend = "Legend1";
+            series11.Name = "Series1";
+            this.chart_Profile.Series.Add(series11);
+            this.chart_Profile.Size = new System.Drawing.Size(692, 365);
+            this.chart_Profile.TabIndex = 22;
+            this.chart_Profile.Text = "chart1";
             // 
             // chart_Vertical
             // 
-            chartArea18.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.BackwardDiagonal;
-            chartArea18.Name = "ChartArea1";
-            chartArea18.Position.Auto = false;
-            chartArea18.Position.Height = 100F;
-            chartArea18.Position.Width = 100F;
-            this.chart_Vertical.ChartAreas.Add(chartArea18);
-            legend18.Name = "Legend1";
-            this.chart_Vertical.Legends.Add(legend18);
-            this.chart_Vertical.Location = new System.Drawing.Point(5, 405);
+            chartArea12.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.BackwardDiagonal;
+            chartArea12.Name = "ChartArea1";
+            chartArea12.Position.Auto = false;
+            chartArea12.Position.Height = 100F;
+            chartArea12.Position.Width = 100F;
+            this.chart_Vertical.ChartAreas.Add(chartArea12);
+            legend12.Name = "Legend1";
+            this.chart_Vertical.Legends.Add(legend12);
+            this.chart_Vertical.Location = new System.Drawing.Point(127, 400);
             this.chart_Vertical.Name = "chart_Vertical";
-            series18.ChartArea = "ChartArea1";
-            series18.Legend = "Legend1";
-            series18.Name = "Series1";
-            this.chart_Vertical.Series.Add(series18);
-            this.chart_Vertical.Size = new System.Drawing.Size(692, 319);
+            series12.ChartArea = "ChartArea1";
+            series12.Legend = "Legend1";
+            series12.Name = "Series1";
+            this.chart_Vertical.Series.Add(series12);
+            this.chart_Vertical.Size = new System.Drawing.Size(692, 326);
             this.chart_Vertical.TabIndex = 15;
             this.chart_Vertical.Text = "chart1";
             // 
@@ -520,7 +554,7 @@ namespace PipeModel
             this.wb_Profile.Margin = new System.Windows.Forms.Padding(1);
             this.wb_Profile.MinimumSize = new System.Drawing.Size(20, 20);
             this.wb_Profile.Name = "wb_Profile";
-            this.wb_Profile.Size = new System.Drawing.Size(1067, 735);
+            this.wb_Profile.Size = new System.Drawing.Size(1123, 735);
             this.wb_Profile.TabIndex = 17;
             this.wb_Profile.Url = new System.Uri("http://·", System.UriKind.Absolute);
             // 
@@ -532,7 +566,7 @@ namespace PipeModel
             this.tabPage_Data.Location = new System.Drawing.Point(4, 26);
             this.tabPage_Data.Name = "tabPage_Data";
             this.tabPage_Data.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Data.Size = new System.Drawing.Size(1164, 739);
+            this.tabPage_Data.Size = new System.Drawing.Size(1178, 739);
             this.tabPage_Data.TabIndex = 1;
             this.tabPage_Data.Text = "历史数据";
             this.tabPage_Data.UseVisualStyleBackColor = true;
@@ -684,28 +718,28 @@ namespace PipeModel
             this.groupBox2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox2.Location = new System.Drawing.Point(6, 172);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(324, 262);
+            this.groupBox2.Size = new System.Drawing.Size(264, 262);
             this.groupBox2.TabIndex = 21;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "日志";
             // 
             // txtBox_Log
             // 
+            this.txtBox_Log.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtBox_Log.Location = new System.Drawing.Point(6, 20);
             this.txtBox_Log.Multiline = true;
             this.txtBox_Log.Name = "txtBox_Log";
-            this.txtBox_Log.Size = new System.Drawing.Size(312, 236);
+            this.txtBox_Log.Size = new System.Drawing.Size(250, 236);
             this.txtBox_Log.TabIndex = 0;
             // 
-            // dgv_scanInfoDataTable
+            // label9
             // 
-            this.dgv_scanInfoDataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_scanInfoDataTable.Location = new System.Drawing.Point(719, 16);
-            this.dgv_scanInfoDataTable.Name = "dgv_scanInfoDataTable";
-            this.dgv_scanInfoDataTable.RowHeadersVisible = false;
-            this.dgv_scanInfoDataTable.RowTemplate.Height = 23;
-            this.dgv_scanInfoDataTable.Size = new System.Drawing.Size(365, 708);
-            this.dgv_scanInfoDataTable.TabIndex = 2;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(0, 438);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(104, 16);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "扫描线示意图";
             // 
             // MainForms
             // 
@@ -733,6 +767,10 @@ namespace PipeModel
             this.groupBox1.ResumeLayout(false);
             this.tabControl_View.ResumeLayout(false);
             this.tabPage_View.ResumeLayout(false);
+            this.tabPage_View.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBox_chart2D)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_scanInfoDataTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_Profile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_Vertical)).EndInit();
             this.tabPage_Data.ResumeLayout(false);
@@ -740,10 +778,9 @@ namespace PipeModel
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_historyDataTable)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_scanInfoDataTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -785,7 +822,6 @@ namespace PipeModel
         private System.Windows.Forms.TabControl tabControl_View;
         private System.Windows.Forms.TabPage tabPage_View;
         private System.Windows.Forms.WebBrowser wb_Profile;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart_Profile;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart_Vertical;
         private System.Windows.Forms.TabPage tabPage_Data;
         private System.Windows.Forms.GroupBox groupBox4;
@@ -813,6 +849,11 @@ namespace PipeModel
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtBox_Log;
         private System.Windows.Forms.DataGridView dgv_scanInfoDataTable;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart_Profile;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.PictureBox pBox_chart2D;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Label label9;
     }
 }
 

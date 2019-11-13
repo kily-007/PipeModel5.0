@@ -225,6 +225,22 @@ namespace PipeModel
             chart_Vertical.Visible = true;
             wb_Profile.Visible = false;
 
+            //初始化vertical队列
+            for (int i = 0; i < Define.VERTICAL_MAX_X; i++)
+            {
+                _queueVertical.Enqueue(0);
+            }
+
+            for (int i = 0; i < Define.PROFILE2D_MAX_X; i++)
+            {
+                _queue2D.Enqueue(new int[2] { 0, 0 });
+            }
+            for (int i = 0; i < Define.QUEUE3D_LENGTH; i++)
+            {
+                _queue3DCurrentData.Enqueue(new int[807]);
+            }
+            
+
             //添加历史数据表头
             for (int i = 0; i < _historyDataTableHead.Length-1; i++)
             {
@@ -453,7 +469,7 @@ namespace PipeModel
                         {
                             byte[] bs = br.ReadBytes(4 * 807 * _frequencyCount);
                             List<int[]> data = byteArrayToIntArrayList(bs);
-                            MisalignedScan.MisalignedAnalizeData(data);//数据分析入库
+                            MisalignedScan.MisalignedAnalizeData(data,0);//数据分析入库,参数0表示不补正
                         }
                         ReportViewer report = new ReportViewer();
                         report.makeReport();//制作报表
@@ -560,8 +576,9 @@ namespace PipeModel
             chartArea_SingleProfile.Position.Y = Define.CSPY;
             chart_Profile.ChartAreas.Add(chartArea_SingleProfile);
 
-            chart_Profile.ChartAreas[0].AxisX.Title = "扫描次数(2000)";
-            chart_Profile.ChartAreas[0].AxisY.Title = "扫描宽度范围(单位：800*0.3mm)";
+            chart_Profile.ChartAreas[0].AxisX.Title = "待测物宽度(单位:mm)";
+            chart_Profile.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Far;
+            //chart_Profile.ChartAreas[0].AxisY.Title = "探头与待测物距离单位(nmm)";
 
             chart_Profile.Series.Clear();
             Series series_SingleProfile = new Series("S_SingleProfile");
@@ -574,8 +591,8 @@ namespace PipeModel
             chart_Profile.ChartAreas[0].AxisY.Minimum = Define.PROFILE_MIN_Y;
             chart_Profile.ChartAreas[0].AxisY.Maximum = Define.PROFILE_MAX_Y;
 
-            chart_Profile.ChartAreas[0].AxisX.Minimum = Define.PROFILE_MIN_Y;
-            chart_Profile.ChartAreas[0].AxisX.Maximum = Define.PROFILE_MAX_X;
+            //chart_Profile.ChartAreas[0].AxisX.Minimum = Define.PROFILE_MIN_X;
+            //chart_Profile.ChartAreas[0].AxisX.Maximum = Define.PROFILE_MAX_X;
 
             //设置刻度
             chart_Profile.ChartAreas[0].AxisY.Interval = Define.PROFILE_Interval_Y;
@@ -583,26 +600,13 @@ namespace PipeModel
 
             chart_Profile.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Silver;
             chart_Profile.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.Silver;
-
-            //3D效果
-            chart_Profile.ChartAreas[0].Area3DStyle.Enable3D = false;
-            chart_Profile.ChartAreas[0].Area3DStyle.PointDepth = 600;
-            chart_Profile.ChartAreas[0].Area3DStyle.PointGapDepth = 600;
-            chart_Profile.ChartAreas[0].Area3DStyle.Inclination = 30;
-            chart_Profile.ChartAreas[0].Area3DStyle.WallWidth = 0;
-            chart_Profile.ChartAreas[0].Area3DStyle.Rotation = 30;
-            chart_Profile.ChartAreas[0].Area3DStyle.IsClustered = false;
-            chart_Profile.ChartAreas[0].Area3DStyle.Perspective = 0;
-            chart_Profile.ChartAreas[0].Area3DStyle.IsRightAngleAxes = true;
-
+            
 
             chart_Profile.Titles.Clear();
-            chart_Profile.Titles.Add("S01：扫描线");
+            chart_Profile.Titles.Add("探头距离\n(单位:mm)");
             //chart_Profile.Titles[0].Text = "探头A";
             chart_Profile.Titles[0].Position.X = Define.CTPX;
             chart_Profile.Titles[0].Position.Y = Define.CTPY;
-            chart_Profile.Titles[0].ForeColor = Color.Black;
-            chart_Profile.Titles[0].Font = new Font("Microsoft Sans Serif", 10F);
 
         }
 
@@ -612,21 +616,6 @@ namespace PipeModel
         /// </summary>
         private void InitChart_Vertical()
         {
-            //初始化vertical队列
-            for (int i = 0; i < Define.VERTICAL_MAX_X; i++)
-            {
-                _queueVertical.Enqueue(0);
-            }
-
-            for (int i = 0; i < Define.PROFILE2D_MAX_X; i++)
-            {
-                _queue2D.Enqueue(new int[2] { 0,0 });
-            }
-            for (int i = 0; i < Define.QUEUE3D_LENGTH; i++)
-            {
-                _queue3DCurrentData.Enqueue(new int[807]);
-            }
-
             chart_Vertical.ChartAreas.Clear();
             ChartArea chartArea_VerticalProfile = new ChartArea("C_VerticalProfile");
             chartArea_VerticalProfile.Position.Height = Define.CSPH;
@@ -634,8 +623,11 @@ namespace PipeModel
             chartArea_VerticalProfile.Position.X = Define.CSPX;
             chartArea_VerticalProfile.Position.Y = Define.CSPY;
             chart_Vertical.ChartAreas.Add(chartArea_VerticalProfile);
-            chart_Vertical.ChartAreas[0].AxisX.Title = "扫描次数(2000)";
-            chart_Vertical.ChartAreas[0].AxisY.Title = "距离(单位：*0.6mm)";
+            chart_Vertical.ChartAreas[0].AxisX.Title = "探头移动距离(单位：m)";
+            chart_Vertical.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Far;
+            //chart_Vertical.ChartAreas[0].AxisY.Title = "探\n头\n与\n待\n测\n物\n距\n离\n\n单\n位\n(mm)";
+            //chart_Vertical.ChartAreas[0].AxisY.TextOrientation = TextOrientation.Horizontal;
+            //chart_Vertical.ChartAreas[0].AxisY.TitleAlignment = StringAlignment.Far;
 
             chart_Vertical.Series.Clear();
             Series series_VerticalProfile = new Series("S_VerticalProfile");
@@ -643,20 +635,21 @@ namespace PipeModel
 
             chart_Vertical.Series.Add(series_VerticalProfile);
 
+            chart_Vertical.ChartAreas[0].AxisX.Interval = 0.1;
             chart_Vertical.ChartAreas[0].AxisY.Minimum = Define.VERTICAL_MIN_Y;
             chart_Vertical.ChartAreas[0].AxisY.Maximum = Define.VERTICAL_MAX_Y;
             chart_Vertical.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Silver;
             chart_Vertical.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.Silver;
             chart_Vertical.ChartAreas[0].AxisY.Interval = Define.VERTICAL_Interval_Y;
-            chart_Vertical.ChartAreas[0].AxisX.Interval = Define.VERTICAL_Interval_X;
+            //chart_Vertical.ChartAreas[0].AxisX.Interval = Define.VERTICAL_Interval_X;
 
             chart_Vertical.Titles.Clear();
-            chart_Vertical.Titles.Add("S01:Z轴方向");
+            chart_Vertical.Titles.Add("探头距离\n(单位:mm)");
             //chart_Vertical.Titles[0].Text = "探头A";
             chart_Vertical.Titles[0].Position.X = Define.CTPX;
             chart_Vertical.Titles[0].Position.Y = Define.CTPY;
             chart_Vertical.Titles[0].ForeColor = Color.Black;
-            chart_Vertical.Titles[0].Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            chart_Vertical.Titles[0].Font = new Font("Microsoft Sans Serif", 10F);
 
             chart_Vertical.Series[0].Color = Color.Red;
             chart_Vertical.Series[0].ChartType = SeriesChartType.FastLine;
@@ -1533,13 +1526,13 @@ namespace PipeModel
                     _queue3DCurrentData.Dequeue();
                     _queue3DCurrentData.Enqueue(data[i]);
                 }
+                if (_correctionEd)
+                    k =correctionSuppl(data[0]);
 
                 ProfileDataAnalysis.DealWithHightProfileData(data);//数据解析
                 if (drawShap == View.HightSpeed)//绘制x轴扫描轮廓
                 {
-
-                    if (_correctionEd)
-                        k=correctionSuppl(data[0]);
+                    
                     //绘制x轴扫描轮廓
                     if (_updateChartData)
                         DrawHightProfile(data[0],k);
@@ -1567,13 +1560,14 @@ namespace PipeModel
                 //计算分析与存储
                 if (_heightSpeedSaveIsOpen)
                 {
+                    //根据补正参数，对
                     if (!DataExporter.ExportHeightSpeedBinData(data, _defaultSavePath + "data\\source\\scandata.bin"))
                     {
                         PrintLog("[存储高速扫描数据]:NG(0x1000) 存储异常.");
                     }
 
-                    MisalignedScan.MisalignedAnalizeData(data);//数据分析入库
-                    MisalignedScanInfo(data);
+                    MisalignedScan.MisalignedAnalizeData(data,k);//数据分析入库
+                    MisalignedScanInfo(data);//实时计算缝隙与灌道长度
 
                     _countScan += data.Count;
                     _lblReceiveProfileCount0.Text = _countScan.ToString();
@@ -1684,13 +1678,12 @@ namespace PipeModel
 
 
         /// <summary>
-        /// z轴数据处理
+        /// z轴数据处理,显示中线
         /// </summary>
         /// <param name="idata"></param>
         /// <returns></returns>
         private int[] DealWithVerticalProfileData(List<int[]> idata)
         {
-            int avg = 0;
             int left = 6;
             int right = idata[0].Length-1;
             for (int i = 0; i < idata.Count; i++)
@@ -1702,12 +1695,7 @@ namespace PipeModel
                 _queueVertical.Dequeue();
                 if (left != right)
                 {
-                    avg = 0;
-                    for (int j = left; j < right; j++)
-                    {
-                        avg += idata[i][j];
-                    }
-                    _queueVertical.Enqueue((int)(avg / (right - left)));
+                    _queueVertical.Enqueue((int)(idata[i][(left+right)/2]));
                 }else
                     _queueVertical.Enqueue(0);
 
@@ -1727,9 +1715,9 @@ namespace PipeModel
             for (int i = 6; i < dataY.Length - 6; i++)
             {
                 if(dataY[i]!=0)
-                    chart_Profile.Series[0].Points.AddXY((i + Define.PROFILE_MIN_X + 1-6), dataY[i]-pk*i);
+                    chart_Profile.Series[0].Points.AddXY((i + Define.PROFILE_MIN_X + 1-6)*0.3, dataY[i]-pk*i);
                 else
-                    chart_Profile.Series[0].Points.AddXY((i + Define.PROFILE_MIN_X + 1 - 6), dataY[i]);
+                    chart_Profile.Series[0].Points.AddXY((i + Define.PROFILE_MIN_X + 1 - 6)*0.3, dataY[i]);
             }
         }
 
@@ -1739,9 +1727,10 @@ namespace PipeModel
         private void DrawVerticalProfile(int[] dataVertical)
         {
             chart_Vertical.Series[0].Points.Clear();
+            
             for (int i = 0; i < dataVertical.Length; i++)
             {
-                chart_Vertical.Series[0].Points.AddXY((i + Define.VERTICAL_MIN_X+1), dataVertical[i]);
+                chart_Vertical.Series[0].Points.AddXY((i + Define.VERTICAL_MIN_X+1)*0.6/1000 +_countScan*0.6/1000, dataVertical[i]);
             }
 
         }
@@ -1757,8 +1746,8 @@ namespace PipeModel
             {
                 if (true)
                 {
-                    chart_Profile.Series[0].Points.AddXY(i, item[0]);
-                    chart_Profile.Series[0].Points.AddXY(i, item[1]);
+                    chart_Profile.Series[0].Points.AddXY((i +1)* 0.6 / 1000 + _countScan * 0.6 / 1000, item[0]*0.3);
+                    chart_Profile.Series[0].Points.AddXY((i +1 ) * 0.6 / 1000 + _countScan * 0.6 / 1000, item[1]*0.3);
                 }
                 i++;
             }
@@ -1782,16 +1771,21 @@ namespace PipeModel
             wb_Profile.Visible = false;
             drawShap = View.HightSpeed;
             chart_Profile.ChartAreas[0].Area3DStyle.Enable3D = false;
-            
+
+            pBox_chart2D.Image = Resources.line;
+            chart_Profile.ChartAreas[0].AxisX.Title = "待测物宽度（单位：mm）";
+            chart_Profile.Titles.Clear();
+            chart_Profile.Titles.Add("探头距离\n(单位:mm)");
+            chart_Profile.Titles[0].Position.X = Define.CTPX;
+            chart_Profile.Titles[0].Position.Y = Define.CTPY;
+
 
             //设置最大最小值
             chart_Profile.ChartAreas[0].AxisY.Minimum = Define.PROFILE_MIN_Y;
             chart_Profile.ChartAreas[0].AxisY.Maximum = Define.PROFILE_MAX_Y;
-            chart_Profile.ChartAreas[0].AxisX.Minimum = Define.PROFILE_MIN_X;
-            chart_Profile.ChartAreas[0].AxisX.Maximum = Define.PROFILE_MAX_X;
+            chart_Profile.ChartAreas[0].AxisX.Interval = Define.PROFILE_Interval_X;
             //设置刻度
             chart_Profile.ChartAreas[0].AxisY.Interval = Define.PROFILE_Interval_Y;
-            chart_Profile.ChartAreas[0].AxisX.Interval = Define.PROFILE_Interval_X;
             PrintLog("[波形切换]:OK(0x0000) 实时波形切换成功.");
         }
 
@@ -1803,18 +1797,24 @@ namespace PipeModel
             wb_Profile.Visible = false;
             drawShap = View.HightSpeed2D;
 
-            chart_Profile.ChartAreas[0].Area3DStyle.Enable3D = true;
+            pBox_chart2D.Image = Resources.part2D;
+
+            //chart_Profile.ChartAreas[0].Area3DStyle.Enable3D = true;
             //设置最大最小值
             chart_Profile.ChartAreas[0].AxisY.Minimum = Define.PROFILE2D_MIN_Y;
             chart_Profile.ChartAreas[0].AxisY.Maximum = Define.PROFILE2D_MAX_Y;
-
-            chart_Profile.ChartAreas[0].AxisX.Minimum = Define.PROFILE2D_MIN_X;
-            chart_Profile.ChartAreas[0].AxisX.Maximum = Define.PROFILE2D_MAX_X;
-
-
+            chart_Profile.ChartAreas[0].AxisX.Interval = 0.1;
             //设置刻度
             chart_Profile.ChartAreas[0].AxisY.Interval = Define.PROFILE2D_Interval_Y;
-            chart_Profile.ChartAreas[0].AxisX.Interval = Define.PROFILE2D_Interval_X;
+
+
+            chart_Profile.ChartAreas[0].AxisX.Title = "探头移动距离（单位：m）";
+            chart_Profile.Titles.Clear();
+            chart_Profile.Titles.Add("待测物宽度\n(单位:mm)");
+            chart_Profile.Titles[0].Position.X = Define.CTPX;
+            chart_Profile.Titles[0].Position.Y = Define.CTPY;
+
+            
             
             PrintLog("[波形切换]:OK(0x0000) 实时波形切换成功.");
         }

@@ -91,18 +91,18 @@ namespace PipeModel
         public const int PROFILE_MIN_Y = 0;
         public const int PROFILE_MAX_Y = 600;
         public const int PROFILE_MIN_X = 0;
-        public const int PROFILE_MAX_X = 800;
-        public const int PROFILE_Interval_X = 100;//刻度线
+        public const int PROFILE_MAX_X = 240;
+        public const int PROFILE_Interval_X = 30;//刻度线，单位：cm
         public const int PROFILE_Interval_Y = 100;
         /// <summary>
         /// 2D坐标轴最值
         /// </summary>
         public const int PROFILE2D_MIN_Y = 0;
-        public const int PROFILE2D_MAX_Y = 800;
+        public const int PROFILE2D_MAX_Y = 240;//单位：mm
         public const int PROFILE2D_MIN_X = 0;
         public const int PROFILE2D_MAX_X = 1000;
-        public const int PROFILE2D_Interval_X = 200;//刻度线
-        public const int PROFILE2D_Interval_Y = 100;
+        public const int PROFILE2D_Interval_X = 100;//刻度线
+        public const int PROFILE2D_Interval_Y = 30;
         /// <summary>
         /// VerticalProfile坐标轴最值
         /// </summary>
@@ -110,7 +110,7 @@ namespace PipeModel
         public const int VERTICAL_MAX_Y = 600;
         public const int VERTICAL_MIN_X = 0;
         public const int VERTICAL_MAX_X = 1000;
-        public const int VERTICAL_Interval_X = 200;//刻度线
+        public const int VERTICAL_Interval_X = 100;//刻度线
         public const int VERTICAL_Interval_Y= 100;
 
         //3D实时队列长度
@@ -129,7 +129,7 @@ namespace PipeModel
         public const int CSPW = 95;
         public const int CSPX = 0;
         public const int CSPY = 10;
-        public const int CTPX = 10;
+        public const int CTPX = 5;
         public const int CTPY = 5;
 
 

@@ -18,7 +18,7 @@ namespace PipeModel
         /// </summary>
         /// <param name="list"></param>
         /// <param name="count"></param>
-        public static void MisalignedAnalizeData(List<int[]> datas)
+        public static void MisalignedAnalizeData(List<int[]> datas,double k)
         {
             if (datas.Count <= 0)
                 return;
@@ -39,6 +39,14 @@ namespace PipeModel
                 leftSumy = 0;
                 middleSumy = 0;
                 rightSumy = 0;
+
+                //根据参数，自动补正数据
+                for (int j = leftTx; j < rightTx; j++)
+                {
+                    datas[i][j] -= (int)(k * (j-6));
+                }
+
+
                 
                 while (leftTx < rightTx && datas[i][leftTx] == Define.INVALID_DATA_ORIGINAL) leftTx++;
                 while (leftTx < rightTx && datas[i][rightTx] == Define.INVALID_DATA_ORIGINAL) rightTx--;

@@ -141,8 +141,8 @@
   <data name="SID_GET_SETTING" xml:space="preserve">
     <value>GetSetting</value>
   </data>
-  <data name="SID_RESULT_NG" xml:space="preserve">
-    <value>NG</value>
+  <data name="SID_CLEAR_ERROR" xml:space="preserve">
+    <value>ClearError</value>
   </data>
   <data name="SID_SET_TIME" xml:space="preserve">
     <value>SetTime</value>
@@ -162,8 +162,8 @@
   <data name="SID_RC_ERR_TIMEOUT" xml:space="preserve">
     <value>Time out</value>
   </data>
-  <data name="SID_CHANGE_ACTIVE_PROGRAM" xml:space="preserve">
-    <value>ChangeActiveProgram</value>
+  <data name="SID_CHECK_MEMORY_ACCESS" xml:space="preserve">
+    <value>CheckMemoryAccess</value>
   </data>
   <data name="SID_START_STORAGE" xml:space="preserve">
     <value>StartStorage</value>
@@ -179,6 +179,9 @@
   </data>
   <data name="SID_STOP_STORAGE" xml:space="preserve">
     <value>StopStorage</value>
+  </data>
+  <data name="SID_REBOOT_CONTROLLER" xml:space="preserve">
+    <value>RebootController</value>
   </data>
   <data name="SID_HIGH_SPEED_DATA_ETHERNET_COMMUNICATION_INITALIZE" xml:space="preserve">
     <value>HighSpeedDataEthernet CommunicationInitalize</value>
@@ -225,6 +228,9 @@
   <data name="SID_START_MEASURE" xml:space="preserve">
     <value>StartMeasure</value>
   </data>
+  <data name="SID_MEASURE_RANGE_SMALL" xml:space="preserve">
+    <value>SMALL</value>
+  </data>
   <data name="SID_RC_ERR_OPEN_DEVICE" xml:space="preserve">
     <value>Failed to open the device</value>
   </data>
@@ -234,11 +240,12 @@
   <data name="SID_CLEAR_MEMORY" xml:space="preserve">
     <value>ClearMemory</value>
   </data>
-  <data name="SID_CHECK_MEMORY_ACCESS" xml:space="preserve">
-    <value>CheckMemoryAccess</value>
-  </data>
   <data name="SID_GET_VERSION" xml:space="preserve">
     <value>GetVersion</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="line" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\line.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SID_GET_STORAGE_STATUS" xml:space="preserve">
     <value>GetStorageStatus</value>
@@ -246,8 +253,8 @@
   <data name="SID_STOP_HIGH_SPEED_DATA_COMMUNICATION" xml:space="preserve">
     <value>StopHighSpeedData Communication</value>
   </data>
-  <data name="SID_REBOOT_CONTROLLER" xml:space="preserve">
-    <value>RebootController</value>
+  <data name="SID_NOT_DEFINE_FROMAT" xml:space="preserve">
+    <value>＃Undefined RC (0x{0,0:X4})</value>
   </data>
   <data name="SID_INITIALIZE_SETTING" xml:space="preserve">
     <value>InitializeSetting</value>
@@ -255,8 +262,8 @@
   <data name="SID_COMM_CLOSE" xml:space="preserve">
     <value>CommClose</value>
   </data>
-  <data name="SID_MEASURE_RANGE_SMALL" xml:space="preserve">
-    <value>SMALL</value>
+  <data name="SID_RESULT_NG" xml:space="preserve">
+    <value>NG</value>
   </data>
   <data name="SID_RC_ERR_SEND" xml:space="preserve">
     <value>Command send error</value>
@@ -269,9 +276,6 @@
   </data>
   <data name="SID_COMPRESS_X_4" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="SID_NOT_DEFINE_FROMAT" xml:space="preserve">
-    <value>＃Undefined RC (0x{0,0:X4})</value>
   </data>
   <data name="SID_MEASURE_RANGE_FULL" xml:space="preserve">
     <value>FULL</value>
@@ -312,9 +316,6 @@
   <data name="SID_SET_SETTING" xml:space="preserve">
     <value>SetSetting</value>
   </data>
-  <data name="SID_CLEAR_ERROR" xml:space="preserve">
-    <value>ClearError</value>
-  </data>
   <data name="SID_RC_ERR_UNKNOWN" xml:space="preserve">
     <value>Undefined error</value>
   </data>
@@ -324,14 +325,19 @@
   <data name="SID_RC_OK" xml:space="preserve">
     <value>Normal termination</value>
   </data>
+  <data name="part2D" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\part2D.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="SID_GET_BATCH_PROFILE" xml:space="preserve">
     <value>GetBatchProfile</value>
+  </data>
+  <data name="SID_CHANGE_ACTIVE_PROGRAM" xml:space="preserve">
+    <value>ChangeActiveProgram</value>
   </data>
   <data name="SID_FINALIZE" xml:space="preserve">
     <value>Finalize</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="OK" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Image\OK.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="all" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\all.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

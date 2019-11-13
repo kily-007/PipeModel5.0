@@ -63,9 +63,29 @@ namespace PipeModel.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap OK {
+        internal static System.Drawing.Bitmap all {
             get {
-                object obj = ResourceManager.GetObject("OK", resourceCulture);
+                object obj = ResourceManager.GetObject("all", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap line {
+            get {
+                object obj = ResourceManager.GetObject("line", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap part2D {
+            get {
+                object obj = ResourceManager.GetObject("part2D", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
