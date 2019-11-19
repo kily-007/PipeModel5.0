@@ -11,6 +11,10 @@ namespace PipeModel
     public static class Define
     {
         #region Constant
+        //调整宽度：MisalignedScan
+        //调整距离：ProfileDataAnalysis
+
+
 
         
 
@@ -120,7 +124,7 @@ namespace PipeModel
         public const int MISA_MIN_X = 0;
         public const int MISA_MAX_X = 10000;
         public const int MISA_Interval_X = 1000;//刻度线
-        public const double MISA_Interval_Y = 1;
+        public const double MISA_Interval_Y = 2;
         /// <summary>
         /// LeftMiddleRight坐标轴最值
         /// </summary>

@@ -31,6 +31,7 @@ namespace PipeModel
             int leftSumy = 0;
             int middleSumy = 0;
             int rightSumy = 0;
+            bool isF = false;
             for (int i = 0; i < datas.Count; i++)
             {
                 leftTx = 6;
@@ -57,6 +58,7 @@ namespace PipeModel
                     int[] MisaYArra = new int[3] { 0, 0, 0 };
                     MisaY.Add(MisaYArra);
                     MisaZ.Add(1);
+                    isF = true;
                 }
                 else
                 {   //MisaX方向磨损计算
@@ -78,13 +80,17 @@ namespace PipeModel
                 
             }
             MysqlConnection.executeInsert(MisaX, MisaY, MisaZ, "S");
-            double[] rs = new double[4] {(MisaY[100][0]+ MisaY[100][2])/2 - MisaY[100][1], MisaX[0][0], MisaY[100][1], MisaX[0][1] };//misa，left，Middle，Right
+            double[] rs;
+            if (isF)
+                rs = new double[4] {(MisaY[100][0]+ MisaY[100][2])/2 - MisaY[100][1], 0, 0, 0 };//misa，left，Middle，Right
+            else
+                rs = new double[4] { (MisaY[100][0] + MisaY[100][2]) / 2 - MisaY[100][1], MisaX[0][0], MisaY[100][1], MisaX[0][1] };//misa，left，Middle，Right
             return rs;
             //return MisaY[100][1];
         }
 
         //判断宽度小于300，则为缝隙
-        private static bool scanWidth(int left,int right,int[] data)
+        public static bool scanWidth(int left,int right,int[] data)
         {
             if (right - left < 300)//宽度小于300
             {

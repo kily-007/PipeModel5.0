@@ -234,9 +234,12 @@
   <ItemGroup>
     <Content Include="Image\all.jpg" />
     <Content Include="Image\img_scan1.png" />
+    <None Include="Image\leftRightLine.png" />
     <Content Include="Image\line.jpg" />
+    <None Include="Image\middleMisaLine.png" />
     <Content Include="Image\part2D.jpg" />
     <None Include="Image\罐道坐标示意图.jpg" />
+    <None Include="Image\罐道轮廓线示意图.png" />
     <Content Include="Lib\LJV7_IF.dll" />
     <Content Include="Lib\MySql.Data.dll" />
   </ItemGroup>

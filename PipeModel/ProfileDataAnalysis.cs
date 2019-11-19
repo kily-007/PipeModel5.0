@@ -65,13 +65,21 @@ namespace PipeModel.DataAnalysis
                     profDatas[i] = Convert.ToInt32(300 - profDatas[i] * 0.00001);
 
                 //去无效数据
-                while (left <= right)
+                int temp = left;
+                while (temp <= right)
                 {
-                    if (profDatas[left] == Define.INVALID_DATA)
-                        profDatas[left] = Define.PROFILE_MIN_Y;
-                    left++;
+                    if (profDatas[temp] == Define.INVALID_DATA)
+                        profDatas[temp] = Define.PROFILE_MIN_Y;
+                    temp++;
                 }
 
+                //当距离超过400mm，将值置为0
+                for (int i = left; i < right; i++)
+                {
+                    if (profDatas[i] > 400)
+                        profDatas[i] = 0;
+                }
+                
 
                 /////数据两头去无效数据
                 //while (left <= right && profDatas[left] == Define.INVALID_DATA)

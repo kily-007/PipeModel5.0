@@ -31,18 +31,18 @@ namespace PipeModel
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea13 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend13 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea14 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend14 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea15 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend15 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series15 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea16 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend16 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.新建ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,6 +70,9 @@ namespace PipeModel
             this.数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.导出特征数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.导出表ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.导出表ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.导出表ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.导出表ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.测试ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this._timerHighSpeed = new System.Windows.Forms.Timer(this.components);
             this._profileFileSave = new System.Windows.Forms.SaveFileDialog();
@@ -95,6 +98,12 @@ namespace PipeModel
             this.chart_Vertical = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.wb_Profile = new System.Windows.Forms.WebBrowser();
             this.tabPage_AllLine = new System.Windows.Forms.TabPage();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.chart_LeftRight = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chart_Misa = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabPage_Data = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btn_refresh = new System.Windows.Forms.Button();
@@ -113,11 +122,7 @@ namespace PipeModel
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtBox_Log = new System.Windows.Forms.TextBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.chart_Misa = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.chart_LeftRight = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.导出表ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.导出表ToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.导出表ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.回放数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this._pnlDeviceId.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -131,13 +136,15 @@ namespace PipeModel
             ((System.ComponentModel.ISupportInitialize)(this.chart_Profile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_Vertical)).BeginInit();
             this.tabPage_AllLine.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart_LeftRight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart_Misa)).BeginInit();
             this.tabPage_Data.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_historyDataTable)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart_Misa)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart_LeftRight)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -209,21 +216,21 @@ namespace PipeModel
             // usb连接ToolStripMenuItem
             // 
             this.usb连接ToolStripMenuItem.Name = "usb连接ToolStripMenuItem";
-            this.usb连接ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.usb连接ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.usb连接ToolStripMenuItem.Text = "USB连接";
             this.usb连接ToolStripMenuItem.Click += new System.EventHandler(this.USBToolStripMenuItem_Click);
             // 
             // 断开连接ToolStripMenuItem
             // 
             this.断开连接ToolStripMenuItem.Name = "断开连接ToolStripMenuItem";
-            this.断开连接ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.断开连接ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.断开连接ToolStripMenuItem.Text = "网线连接";
             this.断开连接ToolStripMenuItem.Click += new System.EventHandler(this.网线连接ToolStripMenuItem_Click);
             // 
             // 调试ToolStripMenuItem
             // 
             this.调试ToolStripMenuItem.Name = "调试ToolStripMenuItem";
-            this.调试ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.调试ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.调试ToolStripMenuItem.Text = "调试";
             this.调试ToolStripMenuItem.Click += new System.EventHandler(this.调试ToolStripMenuItem_Click_1);
             // 
@@ -264,14 +271,14 @@ namespace PipeModel
             // 生成报表ToolStripMenuItem
             // 
             this.生成报表ToolStripMenuItem.Name = "生成报表ToolStripMenuItem";
-            this.生成报表ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.生成报表ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.生成报表ToolStripMenuItem.Text = "生成报表";
             this.生成报表ToolStripMenuItem.Click += new System.EventHandler(this.生成报表ToolStripMenuItem_Click);
             // 
             // 导出报表ToolStripMenuItem
             // 
             this.导出报表ToolStripMenuItem.Name = "导出报表ToolStripMenuItem";
-            this.导出报表ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.导出报表ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.导出报表ToolStripMenuItem.Text = "导出报表";
             this.导出报表ToolStripMenuItem.Click += new System.EventHandler(this.导出报表ToolStripMenuItem_Click);
             // 
@@ -328,14 +335,14 @@ namespace PipeModel
             // 补正ToolStripMenuItem1
             // 
             this.补正ToolStripMenuItem1.Name = "补正ToolStripMenuItem1";
-            this.补正ToolStripMenuItem1.Size = new System.Drawing.Size(152, 26);
+            this.补正ToolStripMenuItem1.Size = new System.Drawing.Size(112, 26);
             this.补正ToolStripMenuItem1.Text = "补正";
             this.补正ToolStripMenuItem1.Click += new System.EventHandler(this.补正ToolStripMenuItem1_Click);
             // 
             // 还原ToolStripMenuItem
             // 
             this.还原ToolStripMenuItem.Name = "还原ToolStripMenuItem";
-            this.还原ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.还原ToolStripMenuItem.Size = new System.Drawing.Size(112, 26);
             this.还原ToolStripMenuItem.Text = "还原";
             this.还原ToolStripMenuItem.Click += new System.EventHandler(this.还原ToolStripMenuItem_Click);
             // 
@@ -365,8 +372,30 @@ namespace PipeModel
             this.导出表ToolStripMenuItem1.Size = new System.Drawing.Size(176, 26);
             this.导出表ToolStripMenuItem1.Text = "导出表①";
             // 
+            // 导出表ToolStripMenuItem2
+            // 
+            this.导出表ToolStripMenuItem2.Name = "导出表ToolStripMenuItem2";
+            this.导出表ToolStripMenuItem2.Size = new System.Drawing.Size(176, 26);
+            this.导出表ToolStripMenuItem2.Text = "导出表②";
+            // 
+            // 导出表ToolStripMenuItem3
+            // 
+            this.导出表ToolStripMenuItem3.Name = "导出表ToolStripMenuItem3";
+            this.导出表ToolStripMenuItem3.Size = new System.Drawing.Size(176, 26);
+            this.导出表ToolStripMenuItem3.Text = "导出表③";
+            this.导出表ToolStripMenuItem3.Click += new System.EventHandler(this.导出表ToolStripMenuItem3_Click);
+            // 
+            // 导出表ToolStripMenuItem4
+            // 
+            this.导出表ToolStripMenuItem4.Name = "导出表ToolStripMenuItem4";
+            this.导出表ToolStripMenuItem4.Size = new System.Drawing.Size(176, 26);
+            this.导出表ToolStripMenuItem4.Text = "导出表④";
+            this.导出表ToolStripMenuItem4.Click += new System.EventHandler(this.导出表ToolStripMenuItem4_Click);
+            // 
             // 测试ToolStripMenuItem1
             // 
+            this.测试ToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.回放数据ToolStripMenuItem});
             this.测试ToolStripMenuItem1.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.测试ToolStripMenuItem1.Name = "测试ToolStripMenuItem1";
             this.测试ToolStripMenuItem1.Size = new System.Drawing.Size(54, 25);
@@ -525,7 +554,7 @@ namespace PipeModel
             // pictureBox3
             // 
             this.pictureBox3.Image = global::PipeModel.Properties.Resources.all;
-            this.pictureBox3.Location = new System.Drawing.Point(0, 457);
+            this.pictureBox3.Location = new System.Drawing.Point(0, 511);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(121, 65);
             this.pictureBox3.TabIndex = 26;
@@ -534,7 +563,7 @@ namespace PipeModel
             // pBox_chart2D
             // 
             this.pBox_chart2D.Image = global::PipeModel.Properties.Resources.line;
-            this.pBox_chart2D.Location = new System.Drawing.Point(0, 56);
+            this.pBox_chart2D.Location = new System.Drawing.Point(0, 104);
             this.pBox_chart2D.Name = "pBox_chart2D";
             this.pBox_chart2D.Size = new System.Drawing.Size(121, 131);
             this.pBox_chart2D.TabIndex = 26;
@@ -543,7 +572,7 @@ namespace PipeModel
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(0, 438);
+            this.label9.Location = new System.Drawing.Point(0, 492);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(104, 16);
             this.label9.TabIndex = 25;
@@ -552,7 +581,7 @@ namespace PipeModel
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(0, 37);
+            this.label8.Location = new System.Drawing.Point(0, 85);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(104, 16);
             this.label8.TabIndex = 25;
@@ -570,36 +599,36 @@ namespace PipeModel
             // 
             // chart_Profile
             // 
-            chartArea13.Name = "ChartArea1";
-            this.chart_Profile.ChartAreas.Add(chartArea13);
-            legend13.Name = "Legend1";
-            this.chart_Profile.Legends.Add(legend13);
+            chartArea5.Name = "ChartArea1";
+            this.chart_Profile.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.chart_Profile.Legends.Add(legend5);
             this.chart_Profile.Location = new System.Drawing.Point(127, 0);
             this.chart_Profile.Name = "chart_Profile";
-            series13.ChartArea = "ChartArea1";
-            series13.Legend = "Legend1";
-            series13.Name = "Series1";
-            this.chart_Profile.Series.Add(series13);
+            series5.ChartArea = "ChartArea1";
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.chart_Profile.Series.Add(series5);
             this.chart_Profile.Size = new System.Drawing.Size(692, 376);
             this.chart_Profile.TabIndex = 22;
             this.chart_Profile.Text = "chart1";
             // 
             // chart_Vertical
             // 
-            chartArea14.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.BackwardDiagonal;
-            chartArea14.Name = "ChartArea1";
-            chartArea14.Position.Auto = false;
-            chartArea14.Position.Height = 100F;
-            chartArea14.Position.Width = 100F;
-            this.chart_Vertical.ChartAreas.Add(chartArea14);
-            legend14.Name = "Legend1";
-            this.chart_Vertical.Legends.Add(legend14);
+            chartArea6.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.BackwardDiagonal;
+            chartArea6.Name = "ChartArea1";
+            chartArea6.Position.Auto = false;
+            chartArea6.Position.Height = 100F;
+            chartArea6.Position.Width = 100F;
+            this.chart_Vertical.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chart_Vertical.Legends.Add(legend6);
             this.chart_Vertical.Location = new System.Drawing.Point(127, 385);
             this.chart_Vertical.Name = "chart_Vertical";
-            series14.ChartArea = "ChartArea1";
-            series14.Legend = "Legend1";
-            series14.Name = "Series1";
-            this.chart_Vertical.Series.Add(series14);
+            series6.ChartArea = "ChartArea1";
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.chart_Vertical.Series.Add(series6);
             this.chart_Vertical.Size = new System.Drawing.Size(692, 351);
             this.chart_Vertical.TabIndex = 15;
             this.chart_Vertical.Text = "chart1";
@@ -616,6 +645,10 @@ namespace PipeModel
             // 
             // tabPage_AllLine
             // 
+            this.tabPage_AllLine.Controls.Add(this.pictureBox4);
+            this.tabPage_AllLine.Controls.Add(this.label11);
+            this.tabPage_AllLine.Controls.Add(this.pictureBox2);
+            this.tabPage_AllLine.Controls.Add(this.label10);
             this.tabPage_AllLine.Controls.Add(this.chart_LeftRight);
             this.tabPage_AllLine.Controls.Add(this.chart_Misa);
             this.tabPage_AllLine.Location = new System.Drawing.Point(4, 26);
@@ -624,6 +657,74 @@ namespace PipeModel
             this.tabPage_AllLine.TabIndex = 2;
             this.tabPage_AllLine.Text = "全局曲线";
             this.tabPage_AllLine.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::PipeModel.Properties.Resources.middleMisaLine;
+            this.pictureBox4.Location = new System.Drawing.Point(3, 114);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(136, 74);
+            this.pictureBox4.TabIndex = 31;
+            this.pictureBox4.TabStop = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(0, 95);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(104, 16);
+            this.label11.TabIndex = 30;
+            this.label11.Text = "扫描线示意图";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::PipeModel.Properties.Resources.leftRightLine;
+            this.pictureBox2.Location = new System.Drawing.Point(0, 509);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(139, 74);
+            this.pictureBox2.TabIndex = 31;
+            this.pictureBox2.TabStop = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(-3, 490);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(104, 16);
+            this.label10.TabIndex = 30;
+            this.label10.Text = "扫描线示意图";
+            // 
+            // chart_LeftRight
+            // 
+            chartArea7.Name = "ChartArea1";
+            this.chart_LeftRight.ChartAreas.Add(chartArea7);
+            legend7.Name = "Legend1";
+            this.chart_LeftRight.Legends.Add(legend7);
+            this.chart_LeftRight.Location = new System.Drawing.Point(145, 367);
+            this.chart_LeftRight.Name = "chart_LeftRight";
+            series7.ChartArea = "ChartArea1";
+            series7.Legend = "Legend1";
+            series7.Name = "Series1";
+            this.chart_LeftRight.Series.Add(series7);
+            this.chart_LeftRight.Size = new System.Drawing.Size(1033, 359);
+            this.chart_LeftRight.TabIndex = 29;
+            this.chart_LeftRight.Text = "chart1";
+            // 
+            // chart_Misa
+            // 
+            chartArea8.Name = "ChartArea1";
+            this.chart_Misa.ChartAreas.Add(chartArea8);
+            legend8.Name = "Legend1";
+            this.chart_Misa.Legends.Add(legend8);
+            this.chart_Misa.Location = new System.Drawing.Point(145, 27);
+            this.chart_Misa.Name = "chart_Misa";
+            series8.ChartArea = "ChartArea1";
+            series8.Legend = "Legend1";
+            series8.Name = "Series1";
+            this.chart_Misa.Series.Add(series8);
+            this.chart_Misa.Size = new System.Drawing.Size(1033, 334);
+            this.chart_Misa.TabIndex = 28;
+            this.chart_Misa.Text = "chart1";
             // 
             // tabPage_Data
             // 
@@ -799,57 +900,12 @@ namespace PipeModel
             this.txtBox_Log.Size = new System.Drawing.Size(250, 236);
             this.txtBox_Log.TabIndex = 0;
             // 
-            // chart_Misa
+            // 回放数据ToolStripMenuItem
             // 
-            chartArea15.Name = "ChartArea1";
-            this.chart_Misa.ChartAreas.Add(chartArea15);
-            legend15.Name = "Legend1";
-            this.chart_Misa.Legends.Add(legend15);
-            this.chart_Misa.Location = new System.Drawing.Point(3, 27);
-            this.chart_Misa.Name = "chart_Misa";
-            series15.ChartArea = "ChartArea1";
-            series15.Legend = "Legend1";
-            series15.Name = "Series1";
-            this.chart_Misa.Series.Add(series15);
-            this.chart_Misa.Size = new System.Drawing.Size(1175, 334);
-            this.chart_Misa.TabIndex = 28;
-            this.chart_Misa.Text = "chart1";
-            // 
-            // chart_LeftRight
-            // 
-            chartArea16.Name = "ChartArea1";
-            this.chart_LeftRight.ChartAreas.Add(chartArea16);
-            legend16.Name = "Legend1";
-            this.chart_LeftRight.Legends.Add(legend16);
-            this.chart_LeftRight.Location = new System.Drawing.Point(3, 367);
-            this.chart_LeftRight.Name = "chart_LeftRight";
-            series16.ChartArea = "ChartArea1";
-            series16.Legend = "Legend1";
-            series16.Name = "Series1";
-            this.chart_LeftRight.Series.Add(series16);
-            this.chart_LeftRight.Size = new System.Drawing.Size(1175, 359);
-            this.chart_LeftRight.TabIndex = 29;
-            this.chart_LeftRight.Text = "chart1";
-            // 
-            // 导出表ToolStripMenuItem2
-            // 
-            this.导出表ToolStripMenuItem2.Name = "导出表ToolStripMenuItem2";
-            this.导出表ToolStripMenuItem2.Size = new System.Drawing.Size(176, 26);
-            this.导出表ToolStripMenuItem2.Text = "导出表②";
-            // 
-            // 导出表ToolStripMenuItem3
-            // 
-            this.导出表ToolStripMenuItem3.Name = "导出表ToolStripMenuItem3";
-            this.导出表ToolStripMenuItem3.Size = new System.Drawing.Size(176, 26);
-            this.导出表ToolStripMenuItem3.Text = "导出表③";
-            this.导出表ToolStripMenuItem3.Click += new System.EventHandler(this.导出表ToolStripMenuItem3_Click);
-            // 
-            // 导出表ToolStripMenuItem4
-            // 
-            this.导出表ToolStripMenuItem4.Name = "导出表ToolStripMenuItem4";
-            this.导出表ToolStripMenuItem4.Size = new System.Drawing.Size(176, 26);
-            this.导出表ToolStripMenuItem4.Text = "导出表④";
-            this.导出表ToolStripMenuItem4.Click += new System.EventHandler(this.导出表ToolStripMenuItem4_Click);
+            this.回放数据ToolStripMenuItem.Name = "回放数据ToolStripMenuItem";
+            this.回放数据ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.回放数据ToolStripMenuItem.Text = "回放数据";
+            this.回放数据ToolStripMenuItem.Click += new System.EventHandler(this.回放数据ToolStripMenuItem_Click);
             // 
             // MainForms
             // 
@@ -884,6 +940,11 @@ namespace PipeModel
             ((System.ComponentModel.ISupportInitialize)(this.chart_Profile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_Vertical)).EndInit();
             this.tabPage_AllLine.ResumeLayout(false);
+            this.tabPage_AllLine.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart_LeftRight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart_Misa)).EndInit();
             this.tabPage_Data.ResumeLayout(false);
             this.tabPage_Data.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -892,8 +953,6 @@ namespace PipeModel
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart_Misa)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart_LeftRight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -976,6 +1035,11 @@ namespace PipeModel
         private System.Windows.Forms.ToolStripMenuItem 导出表ToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem 导出表ToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem 导出表ToolStripMenuItem4;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ToolStripMenuItem 回放数据ToolStripMenuItem;
     }
 }
 
