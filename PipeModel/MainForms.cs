@@ -12,12 +12,9 @@ using PipeModel.Datas;
 using System.Collections;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Threading;
 using PipeModel.Properties;
 using PipeModel.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using Microsoft.Win32;
-using System.Diagnostics;
 using PipeModel.DataAnalysis;
 
 namespace PipeModel
@@ -165,7 +162,7 @@ namespace PipeModel
         /// <summary>历史数据查询表头 </summary>
         public static string[] _historyDataTableHead = { "序号","时间", "报表文件", "文件大小","原始数据","操作"};
         /// <summary>实时扫描信息表头 </summary>
-        public static string[] _scanInfoDataTableHead = { "类型","长度", "横向错位", "纵向错位"};
+        public static string[] _scanInfoDataTableHead = { "类型","横向错位x(mm)", "纵向错位y(mm)","缝隙长度z(mm)"};
         /// <summary>历史数据查询表表按钮名/txt </summary>
         private static readonly string[] historyTableBtnText = new string[4] { "导出", "删除", "生成", "原始数据" };
         private static readonly string[] historyTableBtnName = new string[4] { "btnExportReport", "btnDelete", "btnMakeReport", "btnDataBack" };
@@ -221,6 +218,9 @@ namespace PipeModel
             LoadSkin("office2007.ssk");//初始化皮肤
             InitChart_Profile();//初始化轮廓实时图
             InitChart_Vertical();//初始化Z方向实时图
+            InitChart_LineMisa();//初始化全局磨损曲线
+            InitChart_LeftRight();//初始化全局leftright曲线
+
             chart_Profile.Visible = true;
             chart_Vertical.Visible = true;
             wb_Profile.Visible = false;
@@ -255,37 +255,40 @@ namespace PipeModel
                 DataGridViewTextBoxColumn txtClum = new DataGridViewTextBoxColumn();
                 txtClum.HeaderText = _scanInfoDataTableHead[i];
                 dgv_scanInfoDataTable.Columns.Add(txtClum);
-                txtClum.Width = 90;
+                txtClum.Width = 92;
                 dgv_scanInfoDataTable.Font = new Font("宋体",11);
             }
 
             index = dgv_scanInfoDataTable.Rows.Add();
             dgv_scanInfoDataTable.Rows[index].Cells[0].Value = _countSing+"灌道▅";
             dgv_scanInfoDataTable.Rows[index].Cells[1].Value = 0;
-            dgv_scanInfoDataTable.Rows[index].Cells[2].Value = "*";
-            dgv_scanInfoDataTable.Rows[index].Cells[3].Value = "*";
+            dgv_scanInfoDataTable.Rows[index].Cells[2].Value = 0;
+            dgv_scanInfoDataTable.Rows[index].Cells[3].Value = 0;
+            dgv_scanInfoDataTable.Rows[index].Cells[0].Style.ForeColor = Color.Blue;
+            dgv_scanInfoDataTable.Rows[index].Cells[1].Style.ForeColor = Color.Blue;
+            dgv_scanInfoDataTable.Rows[index].Cells[2].Style.ForeColor = Color.Blue;
+            dgv_scanInfoDataTable.Rows[index].Cells[3].Style.ForeColor = Color.Blue;
+
 
             //初始化实时扫描信息队列
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 2; i++)
             {
                 int[] temp = new int[3] { 0,0,0};
                 misaQueue.Enqueue(temp);
             }
 
-
-
-            dgv_historyDataTable.Columns[0].Width = 60;
-            dgv_historyDataTable.Columns[1].Width = 150;
-            dgv_historyDataTable.Columns[2].Width = 210;
-            dgv_historyDataTable.Columns[3].Width = 90;
-            dgv_historyDataTable.Columns[4].Width = 150;
+            dgv_historyDataTable.Columns[0].Width = 70;
+            dgv_historyDataTable.Columns[1].Width = 190;
+            dgv_historyDataTable.Columns[2].Width = 250;
+            dgv_historyDataTable.Columns[3].Width = 100;
+            dgv_historyDataTable.Columns[4].Width = 200;
             dgv_historyDataTable.Columns.Add("ColBtnEdit", "操作");
-            dgv_historyDataTable.Columns[5].Width = 250;
+            dgv_historyDataTable.Columns[5].Width = 310;
             dgv_historyDataTable.Columns[5].Resizable = DataGridViewTriState.False;
 
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
-            SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
+            //SetStyle(ControlStyles.UserPaint, true);
+            //SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
+            //SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
 
             _req = new LJV7IF_GET_PROFILE_REQ();
 
@@ -378,14 +381,6 @@ namespace PipeModel
             }
         }
 
-        /// <summary>
-        /// 初始化实时扫描信息表格
-        /// </summary>
-        public void InitScanInfoDataTable()
-        {
-            
-        }
-
 
 
 
@@ -455,6 +450,8 @@ namespace PipeModel
                 }
                 else if (info[0].Equals(historyTableBtnName[2]))//生成按钮
                 {
+                    //导出left，right，middleLeft，middle，middleRight，misa
+
                     if (!dgv_historyDataTable.Rows[int.Parse(info[1])].Cells[2].Value.Equals("-1"))
                     {
                         //读原始数据，计算生成对应报表
@@ -469,13 +466,13 @@ namespace PipeModel
                         {
                             byte[] bs = br.ReadBytes(4 * 807 * _frequencyCount);
                             List<int[]> data = byteArrayToIntArrayList(bs);
-                            MisalignedScan.MisalignedAnalizeData(data,0);//数据分析入库,参数0表示不补正
+                            MisalignedScan.MisalignedAnalizeData(data, 0);//数据分析入库,参数0表示不补正
                         }
                         ReportViewer report = new ReportViewer();
                         report.makeReport();//制作报表
                         report.writeWord(_defaultSavePath + "data\\report\\测量报表" + dgv_historyDataTable.Rows[int.Parse(info[1])].Cells[4].Value.ToString().Split('.')[0] + ".docx");//写入word文档
                         //刷新表格
-                        string[][] strTable=MysqlConnection.executeQuery_data("select h_reportFileName,h_reportFileSize from historyData where h_dataFileName='" + dgv_historyDataTable.Rows[int.Parse(info[1])].Cells[4].Value + "'");
+                        string[][] strTable = MysqlConnection.executeQuery_data("select h_reportFileName,h_reportFileSize from historyData where h_dataFileName='" + dgv_historyDataTable.Rows[int.Parse(info[1])].Cells[4].Value + "'");
                         dgv_historyDataTable.Rows[int.Parse(info[1])].Cells[2].Value = strTable[0][0];
                         dgv_historyDataTable.Rows[int.Parse(info[1])].Cells[3].Value = strTable[0][1];
 
@@ -583,28 +580,22 @@ namespace PipeModel
             chart_Profile.Series.Clear();
             Series series_SingleProfile = new Series("S_SingleProfile");
             series_SingleProfile.ChartArea = "C_SingleProfile";
-
             chart_Profile.Series.Add(series_SingleProfile);
+
             chart_Profile.Series[0].Color = Color.Blue;
             chart_Profile.Series[0].ChartType = SeriesChartType.FastLine;
             //设置最大最小值
             chart_Profile.ChartAreas[0].AxisY.Minimum = Define.PROFILE_MIN_Y;
             chart_Profile.ChartAreas[0].AxisY.Maximum = Define.PROFILE_MAX_Y;
-
-            //chart_Profile.ChartAreas[0].AxisX.Minimum = Define.PROFILE_MIN_X;
-            //chart_Profile.ChartAreas[0].AxisX.Maximum = Define.PROFILE_MAX_X;
-
             //设置刻度
             chart_Profile.ChartAreas[0].AxisY.Interval = Define.PROFILE_Interval_Y;
             chart_Profile.ChartAreas[0].AxisX.Interval = Define.PROFILE_Interval_X;
 
             chart_Profile.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Silver;
             chart_Profile.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.Silver;
-            
 
             chart_Profile.Titles.Clear();
             chart_Profile.Titles.Add("探头距离\n(单位:mm)");
-            //chart_Profile.Titles[0].Text = "探头A";
             chart_Profile.Titles[0].Position.X = Define.CTPX;
             chart_Profile.Titles[0].Position.Y = Define.CTPY;
 
@@ -623,40 +614,134 @@ namespace PipeModel
             chartArea_VerticalProfile.Position.X = Define.CSPX;
             chartArea_VerticalProfile.Position.Y = Define.CSPY;
             chart_Vertical.ChartAreas.Add(chartArea_VerticalProfile);
-            chart_Vertical.ChartAreas[0].AxisX.Title = "探头移动距离(单位：m)";
-            chart_Vertical.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Far;
-            //chart_Vertical.ChartAreas[0].AxisY.Title = "探\n头\n与\n待\n测\n物\n距\n离\n\n单\n位\n(mm)";
-            //chart_Vertical.ChartAreas[0].AxisY.TextOrientation = TextOrientation.Horizontal;
-            //chart_Vertical.ChartAreas[0].AxisY.TitleAlignment = StringAlignment.Far;
 
             chart_Vertical.Series.Clear();
             Series series_VerticalProfile = new Series("S_VerticalProfile");
             series_VerticalProfile.ChartArea = "C_VerticalProfile";
-
             chart_Vertical.Series.Add(series_VerticalProfile);
 
+            chart_Vertical.ChartAreas[0].AxisX.Title = "探头移动距离(单位：m)";
+            chart_Vertical.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Far;
             chart_Vertical.ChartAreas[0].AxisX.Interval = 0.1;
             chart_Vertical.ChartAreas[0].AxisY.Minimum = Define.VERTICAL_MIN_Y;
             chart_Vertical.ChartAreas[0].AxisY.Maximum = Define.VERTICAL_MAX_Y;
             chart_Vertical.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Silver;
             chart_Vertical.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.Silver;
             chart_Vertical.ChartAreas[0].AxisY.Interval = Define.VERTICAL_Interval_Y;
-            //chart_Vertical.ChartAreas[0].AxisX.Interval = Define.VERTICAL_Interval_X;
+            
 
             chart_Vertical.Titles.Clear();
             chart_Vertical.Titles.Add("探头距离\n(单位:mm)");
-            //chart_Vertical.Titles[0].Text = "探头A";
             chart_Vertical.Titles[0].Position.X = Define.CTPX;
             chart_Vertical.Titles[0].Position.Y = Define.CTPY;
-            chart_Vertical.Titles[0].ForeColor = Color.Black;
-            chart_Vertical.Titles[0].Font = new Font("Microsoft Sans Serif", 10F);
 
             chart_Vertical.Series[0].Color = Color.Red;
             chart_Vertical.Series[0].ChartType = SeriesChartType.FastLine;
 
         }
 
-      
+
+        /// <summary>
+        /// 初始化全局磨损曲线
+        /// </summary>
+        private void InitChart_LineMisa()
+        {
+            chart_Misa.ChartAreas.Clear();
+            ChartArea chartArea = new ChartArea("C_MisaProfile");
+            chartArea.Position.Height = Define.CSPH;
+            chartArea.Position.Width = Define.CSPW;
+            chartArea.Position.X = Define.CSPX;
+            chartArea.Position.Y = Define.CSPY;
+            chart_Misa.ChartAreas.Add(chartArea);
+            chart_Misa.ChartAreas[0].AxisX.Title = "探头移动距离(单位：m)";
+            chart_Misa.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Far;
+            chart_Misa.ChartAreas[0].AxisY.Minimum = Define.MISA_MIN_Y;
+            chart_Misa.ChartAreas[0].AxisY.Maximum = Define.MISA_MAX_Y;
+            chart_Misa.ChartAreas[0].AxisY.Interval = Define.MISA_Interval_Y;
+            //chart_Misa.ChartAreas[0].AxisX.Minimum = Define.MISA_MIN_X;
+            //chart_Misa.ChartAreas[0].AxisX.Maximum = Define.MISA_MAX_X;
+
+            chart_Misa.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Silver;
+            chart_Misa.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.Silver;
+
+            chart_Misa.Titles.Clear();
+            chart_Misa.Titles.Add("磨损值\n(单位:mm)");
+            //chart_misa.Titles[0].Text = "探头A";
+            chart_Misa.Titles[0].Position.X = Define.CTPX;
+            chart_Misa.Titles[0].Position.Y = Define.CTPY;
+            chart_Misa.Titles[0].ForeColor = Color.Black;
+            chart_Misa.Titles[0].Font = new Font("Microsoft Sans Serif", 10F);
+
+            chart_Misa.Series.Clear();
+            Series series_LineMisa = new Series("S_MisaProfile");
+            series_LineMisa.ChartArea = "C_MisaProfile";
+            chart_Misa.Series.Add(series_LineMisa);
+            chart_Misa.Series[0].Color = Color.Red;
+            chart_Misa.Series[0].ChartType = SeriesChartType.FastLine;
+
+        }
+
+
+        /// <summary>
+        /// 初始化全局leftRight曲线
+        /// </summary>
+        private void InitChart_LeftRight()
+        {
+            chart_LeftRight.ChartAreas.Clear();
+            ChartArea chartArea_Left = new ChartArea("C_LeftMiddleRightProfile");
+
+            chart_LeftRight.ChartAreas.Add(chartArea_Left);
+
+            //绘图区域在chart中的位置
+            chart_LeftRight.ChartAreas[0].Position.X = 0;
+            chart_LeftRight.ChartAreas[0].Position.Y = 13;
+            chart_LeftRight.ChartAreas[0].Position.Width = 90;
+            chart_LeftRight.ChartAreas[0].Position.Height = 85;
+
+            chart_LeftRight.ChartAreas[0].AxisX.Title = "探头移动距离(单位：m)";
+            chart_LeftRight.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Far;
+            chart_LeftRight.ChartAreas[0].AxisY.Minimum = Define.LMR_MIN_Y;
+            chart_LeftRight.ChartAreas[0].AxisY.Maximum = Define.LMR_MAX_Y;
+            chart_LeftRight.ChartAreas[0].AxisY.Interval = Define.LMR_Interval_Y;
+            //chart_LeftRight.ChartAreas[0].AxisX.Minimum = Define.LMR_MIN_X;
+            //chart_LeftRight.ChartAreas[0].AxisX.Maximum = Define.LMR_MAX_X;
+
+            chart_LeftRight.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Silver;
+            chart_LeftRight.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.Silver;
+
+            chart_LeftRight.Titles.Clear();
+            chart_LeftRight.Titles.Add("待测物宽度\n(单位:mm)");
+            //chart_LeftRight.Titles[0].Text = "探头A";
+            chart_LeftRight.Titles[0].Position.X = Define.CTPX;
+            chart_LeftRight.Titles[0].Position.Y = Define.CTPY;
+            chart_LeftRight.Titles[0].ForeColor = Color.Black;
+            chart_LeftRight.Titles[0].Font = new Font("Microsoft Sans Serif", 10F);
+
+            chart_LeftRight.Series.Clear();
+            Series series_Left = new Series("S_LeftProfile");
+            Series series_Middle= new Series("S_MiddleProfile");
+            Series series_Right = new Series("S_RightProfile");
+            series_Left.ChartArea = "C_LeftMiddleRightProfile";
+            series_Middle.ChartArea = "C_LeftMiddleRightProfile";
+            series_Right.ChartArea = "C_LeftMiddleRightProfile";
+
+            chart_LeftRight.Series.Add(series_Left);
+            chart_LeftRight.Series.Add(series_Middle);
+            chart_LeftRight.Series.Add(series_Right);
+
+
+            chart_LeftRight.Series[0].Color = Color.Blue;
+            chart_LeftRight.Series[1].Color = Color.Red;
+            chart_LeftRight.Series[2].Color = Color.Blue;
+            chart_LeftRight.Series[0].ChartType = SeriesChartType.FastLine;
+            chart_LeftRight.Series[1].ChartType = SeriesChartType.FastLine;
+            chart_LeftRight.Series[2].ChartType = SeriesChartType.FastLine;
+
+
+
+        }
+
+
 
         /// <summary>
         /// Method that is called from the DLL as a callback function
@@ -1520,19 +1605,16 @@ namespace PipeModel
             int batcnNo = 0;
             List<int[]> data = ThreadSafeBuffer.Get(Define.DEVICE_ID, out notify, out batcnNo);
             if (data.Count > 0)
-            {
-                for (int i = 0; i < data.Count; i++)
-                {
-                    _queue3DCurrentData.Dequeue();
-                    _queue3DCurrentData.Enqueue(data[i]);
-                }
+            {              
+
+                ProfileDataAnalysis.DealWithHightProfileData(data);//数据解析
+                //纠偏补正
                 if (_correctionEd)
                     k =correctionSuppl(data[0]);
 
-                ProfileDataAnalysis.DealWithHightProfileData(data);//数据解析
+
                 if (drawShap == View.HightSpeed)//绘制x轴扫描轮廓
                 {
-                    
                     //绘制x轴扫描轮廓
                     if (_updateChartData)
                         DrawHightProfile(data[0],k);
@@ -1543,7 +1625,6 @@ namespace PipeModel
                 }
                 else if (drawShap == View.HightSpeed2D)//绘制2D图
                 {
-                    
                     DealWithHightData2D(data);
                     if (_updateChartData)
                         DrawHight2DProfile();
@@ -1556,17 +1637,24 @@ namespace PipeModel
                 {
 
                 }
-                
+
                 //计算分析与存储
                 if (_heightSpeedSaveIsOpen)
                 {
-                    //根据补正参数，对
+                    //根据补正参
+                    double[] rs=MisalignedScan.MisalignedAnalizeData(data, k);//数据分析入库
+
+                    chart_Misa.Series[0].Points.AddXY(_countScan*0.6/1000 , rs[0]);//绘制磨损全局曲线
+                    chart_LeftRight.Series[0].Points.AddXY(_countScan * 0.6 / 1000, rs[1]*0.3);
+                    //chart_LeftRight.Series[1].Points.AddXY(_countScan * 0.6 / 1000, rs[2]);
+                    chart_LeftRight.Series[2].Points.AddXY(_countScan * 0.6 / 1000, rs[3]*0.3);
+
+                    //(i + Define.VERTICAL_MIN_X+1)*0.6/1000 +_countScan*0.6/1000
                     if (!DataExporter.ExportHeightSpeedBinData(data, _defaultSavePath + "data\\source\\scandata.bin"))
                     {
                         PrintLog("[存储高速扫描数据]:NG(0x1000) 存储异常.");
                     }
 
-                    MisalignedScan.MisalignedAnalizeData(data,k);//数据分析入库
                     MisalignedScanInfo(data);//实时计算缝隙与灌道长度
 
                     _countScan += data.Count;
@@ -1590,7 +1678,7 @@ namespace PipeModel
         }
 
         ///做缓存，存储计算值，供实时计算
-        private static Queue<int[]> misaQueue = new Queue<int[]>(10);//1KHZ ，200帧一个list，缓存10个list，即为2秒数据
+        private static Queue<int[]> misaQueue = new Queue<int[]>(2);//1KHZ ，200帧一个list，缓存10个list，即为2秒数据
         
 
 
@@ -1626,30 +1714,34 @@ namespace PipeModel
                         //求均值
                         int misaX = 0;
                         int misaY = 0;
-                        for (int j = 0; j < temp.Length; j++)
+                        for (int j = 0; j < temp.Length-1; j++)
                         {
                             misaX += temp[j][0];
                             misaY += temp[j][1];
                         }
-                        misaX /= temp.Length;
-                        misaY /= temp.Length;
+                        misaX /= (temp.Length-1);
+                        misaY /= (temp.Length-1);
                         misaX -= info[0];
                         misaY -= info[1];
-                        dgv_scanInfoDataTable.Rows[index].Cells[2].Value = Math.Abs(misaX * Define.XLEN) +"mm";
-                        dgv_scanInfoDataTable.Rows[index].Cells[3].Value = Math.Abs(misaY) +"mm";
+                        dgv_scanInfoDataTable.Rows[index].Cells[1].Value = Math.Abs(misaX * Define.XLEN) +"mm";
+                        dgv_scanInfoDataTable.Rows[index].Cells[2].Value = Math.Abs(misaY) +"mm";
 
 
                         _countF = 0;
                         index = dgv_scanInfoDataTable.Rows.Add();
                         dgv_scanInfoDataTable.Rows[index].Cells[0].Value = _countSing+"灌道▅";
-                        dgv_scanInfoDataTable.Rows[index].Cells[1].Value = 0;
+                        dgv_scanInfoDataTable.Rows[index].Cells[1].Value = "";
                         dgv_scanInfoDataTable.Rows[index].Cells[2].Value = "";
                         dgv_scanInfoDataTable.Rows[index].Cells[3].Value = "";
+                        dgv_scanInfoDataTable.Rows[index].Cells[0].Style.ForeColor = Color.Blue;
+                        dgv_scanInfoDataTable.Rows[index].Cells[1].Style.ForeColor = Color.Blue;
+                        dgv_scanInfoDataTable.Rows[index].Cells[2].Style.ForeColor = Color.Blue;
+                        dgv_scanInfoDataTable.Rows[index].Cells[3].Style.ForeColor = Color.Blue;
                     }
 
                     //更新灌道里程
                     _countG++;
-                    dgv_scanInfoDataTable.Rows[index].Cells[1].Value = _countG * (Define.V/ Define.F)+"m";
+                    //dgv_scanInfoDataTable.Rows[index].Cells[3].Value = (_countG+1) * (Define.V/ Define.F)+"m";
                     
                 }
                 //衔接缝
@@ -1666,10 +1758,14 @@ namespace PipeModel
                         dgv_scanInfoDataTable.Rows[index].Cells[1].Value = 0;
                         dgv_scanInfoDataTable.Rows[index].Cells[2].Value = 0;
                         dgv_scanInfoDataTable.Rows[index].Cells[3].Value = 0;
+                        dgv_scanInfoDataTable.Rows[index].Cells[0].Style.ForeColor = Color.Red;
+                        dgv_scanInfoDataTable.Rows[index].Cells[1].Style.ForeColor = Color.Red;
+                        dgv_scanInfoDataTable.Rows[index].Cells[2].Style.ForeColor = Color.Red;
+                        dgv_scanInfoDataTable.Rows[index].Cells[3].Style.ForeColor = Color.Red;
                     }
                     //更新衔接缝里程
                     _countF++;
-                    dgv_scanInfoDataTable.Rows[index].Cells[1].Value = _countF * (Define.V / Define.F)*1000 + "mm";
+                    dgv_scanInfoDataTable.Rows[index].Cells[3].Value = (_countF+1) * (Define.V / Define.F)*1000 + "mm";
                 }
             }
         }
@@ -1715,7 +1811,7 @@ namespace PipeModel
             for (int i = 6; i < dataY.Length - 6; i++)
             {
                 if(dataY[i]!=0)
-                    chart_Profile.Series[0].Points.AddXY((i + Define.PROFILE_MIN_X + 1-6)*0.3, dataY[i]-pk*i);
+                    chart_Profile.Series[0].Points.AddXY((i + Define.PROFILE_MIN_X + 1 - 6)*0.3, dataY[i]-pk*i);
                 else
                     chart_Profile.Series[0].Points.AddXY((i + Define.PROFILE_MIN_X + 1 - 6)*0.3, dataY[i]);
             }
@@ -1768,9 +1864,15 @@ namespace PipeModel
         {
             chart_Profile.Visible = true;
             chart_Vertical.Visible = true;
+            pBox_chart2D.Visible = true;
+            label8.Visible = true;
+            pictureBox3.Visible = true;
+            label9.Visible = true;
             wb_Profile.Visible = false;
+
+
             drawShap = View.HightSpeed;
-            chart_Profile.ChartAreas[0].Area3DStyle.Enable3D = false;
+
 
             pBox_chart2D.Image = Resources.line;
             chart_Profile.ChartAreas[0].AxisX.Title = "待测物宽度（单位：mm）";
@@ -1794,12 +1896,15 @@ namespace PipeModel
         {
             chart_Profile.Visible = true;
             chart_Vertical.Visible = true;
+            pBox_chart2D.Visible = true;
+            label8.Visible = true;
+            pictureBox3.Visible = true;
+            label9.Visible = true;
             wb_Profile.Visible = false;
             drawShap = View.HightSpeed2D;
 
             pBox_chart2D.Image = Resources.part2D;
-
-            //chart_Profile.ChartAreas[0].Area3DStyle.Enable3D = true;
+            
             //设置最大最小值
             chart_Profile.ChartAreas[0].AxisY.Minimum = Define.PROFILE2D_MIN_Y;
             chart_Profile.ChartAreas[0].AxisY.Maximum = Define.PROFILE2D_MAX_Y;
@@ -1813,8 +1918,6 @@ namespace PipeModel
             chart_Profile.Titles.Add("待测物宽度\n(单位:mm)");
             chart_Profile.Titles[0].Position.X = Define.CTPX;
             chart_Profile.Titles[0].Position.Y = Define.CTPY;
-
-            
             
             PrintLog("[波形切换]:OK(0x0000) 实时波形切换成功.");
         }
@@ -1825,6 +1928,11 @@ namespace PipeModel
             chart_Profile.Visible = false;
             chart_Vertical.Visible = false;
             wb_Profile.Visible = true;
+            pBox_chart2D.Visible = false;
+            label8.Visible = false;
+            pictureBox3.Visible = false;
+            label9.Visible = false;
+
 
             drawShap = View.HightSpeed3D;
             try
@@ -1855,8 +1963,6 @@ namespace PipeModel
             //获取原始数据对应存储路径
             string dataFilePath = MysqlConnection.executeQuery_data("select h_dataFilePath from historyData order by h_id DESC limit 1")[0][0];
             //string dataFilePath = @"E:\workplaceC#\PipeModel5.0\data\source\20190728171906.bin";
-            //string dataFilePath = @"E:\workplaceC#\PipeModel5.0\data\source\20190727155423.bin";
-            //string dataFilePath = @"E:\workplaceC#\PipeModel5.0\data\source\20190725185222.bin";
             //读bin文件生成
             FileStream fs = new FileStream(dataFilePath, FileMode.Open, FileAccess.Read);
             BinaryReader br = new BinaryReader(fs);
@@ -1892,32 +1998,40 @@ namespace PipeModel
         }
 
 
+
+
+        private void 导出磨损曲线图ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
         private void 实时3D图ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            chart_Profile.Visible = false;
-            chart_Vertical.Visible = false;
-            wb_Profile.Visible = true;
+            //chart_Profile.Visible = false;
+            //chart_Vertical.Visible = false;
+            //wb_Profile.Visible = true;
 
-            drawShap = View.HightSpeed3D;
-            try
-            {
-                //绘制3D图
-                initWebBrowser();
+            //drawShap = View.HightSpeed3D;
+            //try
+            //{
+            //    //绘制3D图
+            //    initWebBrowser();
 
-                string str = Environment.CurrentDirectory;
-                wb_Profile.Url = new Uri(str + "\\Profile3D.html");
+            //    string str = Environment.CurrentDirectory;
+            //    wb_Profile.Url = new Uri(str + "\\Profile3D.html");
 
-                wb_Profile.Document.InvokeScript("ShopXG");
+            //    wb_Profile.Document.InvokeScript("ShopXG");
 
-                PrintLog("[波形切换]:OK(0x0000) 3D图切换切换成功.");
+            //    PrintLog("[波形切换]:OK(0x0000) 3D图切换切换成功.");
 
 
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-                //PrintLog("[波形切换]:NG(0x1000) 实时3D图切换失败，请到注册表HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\FEATURE_BROWSER_EMULATION添加名称为PipeModel，十进制值为9000的项");
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new Exception(ex.ToString());
+            //    //PrintLog("[波形切换]:NG(0x1000) 实时3D图切换失败，请到注册表HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\FEATURE_BROWSER_EMULATION添加名称为PipeModel，十进制值为9000的项");
+            //}
         }
 
         
@@ -2017,7 +2131,6 @@ namespace PipeModel
                     File.Copy(WordTemplate.filename.ToString(),sfd.FileName,true);
                 }
             }
-           
         }
 
         private void 历史ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2033,20 +2146,22 @@ namespace PipeModel
                     //dataHistoryForm.listBox_HistoryData.Items.Add(fi.FullName);//把.txt文件全名加人到FileInfo对象
                 }
             }
-           
         }
 
         /// <summary>
         /// 点击历史数据选项卡
         /// </summary>
-        private void tabControl_View_MouseClick(object sender, MouseEventArgs e)
+        private void tabControl_View_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string sqlStr = "select h_startTime,h_reportFileName,h_reportFileSize,h_dataFileName from historydata order by h_id DESC limit 20";
-            string[][] data = MysqlConnection.executeQuery_data(sqlStr);
-            InitHistoryDataTable(data);
+            if (tabControl_View.SelectedTab.Name.Equals("tabPage_Data"))
+            {
+                string sqlStr = "select h_startTime,h_reportFileName,h_reportFileSize,h_dataFileName from historydata order by h_id DESC limit 20";
+                string[][] data = MysqlConnection.executeQuery_data(sqlStr);
+                InitHistoryDataTable(data);
+            }
         }
-        
 
+        
         private void 调试ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             _heightSpeedSaveIsOpen = false;
@@ -2167,8 +2282,69 @@ namespace PipeModel
             skinEngine.SkinFile = skinPath+cb_selectSkin.SelectedItem.ToString();
         }
 
-        private void 显示ToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void 测试ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+             chart_Profile.SaveImage("\\image.png", ChartImageFormat.Png);
+        }
+
+
+        /// <summary>
+        ///      //导出left，right，middleLeft，middle，middleRight，misa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void 导出特征数据ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!_startBinDataTime.Equals(""))
+            {
+                string sql = "SELECT * FROM misaligned";
+                string[][] str = MysqlConnection.executeQuery_data(sql);
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "Word Document(*.txt)|*.html";
+                sfd.DefaultExt = "Word Document(*.txt)|*.html";
+
+                sfd.FileName = _startBinDataTime+"特征数据.txt";
+                sfd.InitialDirectory = _defaultSavePath + "\\data";
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    DataExporter.ExportText(str, sfd.FileName);
+                }
+                MessageBox.Show("导出成功");
+            }
+            else
+            {
+                MessageBox.Show("无数据");
+            }
+
+        }
+
+        private void 导出表ToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Word Document(*.png)|*.jpg";
+            sfd.DefaultExt = "Word Document(*.png)|*.jpg";
+
+            sfd.FileName = _startBinDataTime + "chartMisa_表3.png";
+            sfd.InitialDirectory = _defaultSavePath + "\\data\\images";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                chart_Misa.SaveImage(sfd.FileName, ChartImageFormat.Png);
+            }
+            
+        }
+
+        private void 导出表ToolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Word Document(*.png)|*.jpg";
+            sfd.DefaultExt = "Word Document(*.png)|*.jpg";
+
+            sfd.FileName = _startBinDataTime + "chartLeftRight_表4.png";
+            sfd.InitialDirectory = _defaultSavePath + "\\data\\images";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                chart_Misa.SaveImage(sfd.FileName, ChartImageFormat.Png);
+            }
         }
     }
 }

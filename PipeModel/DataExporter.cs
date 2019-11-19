@@ -11,12 +11,75 @@ using System.Collections.Generic;
 
 namespace PipeModel
 {
-    /// <summary>
-    /// Data export class
-    /// </summary>
     public static class DataExporter
     {
         #region Method
+
+
+
+
+        /// <summary>
+        /// Measurement value output
+        /// </summary>
+        /// <param name="datas">Measurement data</param>
+        /// <param name="fileName">File name</param>
+        /// <returns></returns>
+        public static bool ExportText(string[][] data, string path)
+        {
+            try
+            {
+                Encoding unicode = System.Text.Encoding.GetEncoding("utf-16");
+                using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write))
+                {
+                    using (StreamWriter sw = new StreamWriter(fs))
+                    {
+                        try
+                        {
+                            StringBuilder str = new StringBuilder();
+                            str.Append("loca           time                  XL  XR   Y   YM  YR  Z id").Append("\r\n");
+                            for (int i = 0; i < data.Length; i++)
+                            {
+                                for (int j = 1; j < data[i].Length; j++)
+                                {
+                                    str.Append(data[i][j]).Append(" ");
+                                }
+                                str.Append(data[i][0]);
+
+                                str.Append("\r\n");
+                            }
+                            sw.WriteLine("{0}", str, DateTime.Now);
+                            sw.Flush();
+                        }
+                        finally
+                        {
+                            sw.Close();
+                        }
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                // File save failure
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                System.Diagnostics.Debug.Assert(false);
+                return false;
+            }
+
+            return true;
+        }
+
+
+
+
+
+
+
+
+
+
+
 
         /// <summary>
         /// Profile output
@@ -106,9 +169,7 @@ namespace PipeModel
 
             return true;
         }
-
-
-
+        
 
 
         /// <summary>

@@ -64,26 +64,38 @@ namespace PipeModel.DataAnalysis
                 for (int i = left; i <= right; i++)
                     profDatas[i] = Convert.ToInt32(300 - profDatas[i] * 0.00001);
 
-                ///数据两头去无效数据
-                while (left <= right && profDatas[left] == Define.INVALID_DATA)
+                //去无效数据
+                while (left <= right)
                 {
-                    profDatas[left++] = Define.PROFILE_MIN_Y;
+                    if (profDatas[left] == Define.INVALID_DATA)
+                        profDatas[left] = Define.PROFILE_MIN_Y;
+                    left++;
                 }
-                while (left <= right && profDatas[right] == Define.INVALID_DATA)
-                {
-                    profDatas[right--] = Define.PROFILE_MIN_Y;
-                }
-                ///中间无效数据处理
-                for (int i = left; i < 406; i++)
-                {
-                    if (profDatas[i] == Define.INVALID_DATA)
-                        profDatas[i] = profDatas[i - 1];
-                }
-                for (int i = right; i >= 406; i--)
-                {
-                    if (profDatas[i] == Define.INVALID_DATA)
-                        profDatas[i] = profDatas[i + 1];
-                }
+
+
+                /////数据两头去无效数据
+                //while (left <= right && profDatas[left] == Define.INVALID_DATA)
+                //{
+                //    profDatas[left++] = Define.PROFILE_MIN_Y;
+                //}
+                //while (left <= right && profDatas[right] == Define.INVALID_DATA)
+                //{
+                //    profDatas[right--] = Define.PROFILE_MIN_Y;
+                //}
+
+                /////中间无效数据处理
+                //for (int i = left; i < 406; i++)
+                //{
+                //    if (profDatas[i] == Define.INVALID_DATA)
+                //        profDatas[i] = profDatas[i - 1];
+                //}
+                //for (int i = right; i >= 406; i--)
+                //{
+                //    if (profDatas[i] == Define.INVALID_DATA)
+                //        profDatas[i] = profDatas[i + 1];
+                //}
+
+
                 dataRs.Add(profDatas);
             }
             return dataRs;

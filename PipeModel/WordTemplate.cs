@@ -1,7 +1,6 @@
 ﻿using Microsoft.Office.Interop.Word;
 using System;
 using System.IO;
-using System.Windows.Forms;
 
 namespace PipeModel
 {
@@ -21,7 +20,7 @@ namespace PipeModel
         public WordTemplate()
         {
             missing = System.Reflection.Missing.Value;
-            oWord= new Microsoft.Office.Interop.Word.Application();
+            oWord= new Application();
             string str = MainForms._defaultSavePath+ "PipeModel\\WordTemplate\\Result.docx";
             templatePath = str;
             oDoc = oWord.Documents.Add(ref templatePath, ref missing, ref missing, ref missing);

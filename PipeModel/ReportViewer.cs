@@ -92,7 +92,7 @@ namespace PipeModel
             double misaClass = 0;
             for (int i = 0; i < aSingle_id.Count-2; i+=2)
             {
-                string[][] pipePart_data= MysqlConnection.executeQuery_data("select m_misaXLeft,m_misaYMiddle from misaligned where m_id='" + (aSingle_id[i+1]-10) + "' or m_id=" + (aSingle_id[i+2]+10));
+                string[][] pipePart_data= MysqlConnection.executeQuery_data("select m_misaXLeft,m_misaYMiddle from misaligned where m_id='" + (aSingle_id[i+1]) + "' or m_id=" + (aSingle_id[i+2]));
                 misaX = Math.Abs(int.Parse(pipePart_data[0][0]) - int.Parse(pipePart_data[1][0]))*0.3;
                 misaY = Math.Abs(int.Parse(pipePart_data[0][1]) - int.Parse(pipePart_data[1][1]));
                 misaZ = (aSingle_id[i + 2] - aSingle_id[i + 1])* (Define.V / Define.F)*1000;

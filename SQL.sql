@@ -173,4 +173,5 @@ INSERT INTO evaluationLevel VALUES(NULL,5,'优');
 INSERT INTO evaluationLevel VALUES(NULL,10,'良');
 INSERT INTO evaluationLevel VALUES(NULL,15,'警告');
 INSERT INTO evaluationLevel VALUES(NULL,'n','危险')
+DELETE FROM evaluationLevel WHERE e_id>4
 

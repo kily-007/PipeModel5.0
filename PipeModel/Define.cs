@@ -112,6 +112,26 @@ namespace PipeModel
         public const int VERTICAL_MAX_X = 1000;
         public const int VERTICAL_Interval_X = 100;//刻度线
         public const int VERTICAL_Interval_Y= 100;
+        /// <summary>
+        /// LineMisa坐标轴最值
+        /// </summary>
+        public const int MISA_MIN_Y = -10;
+        public const int MISA_MAX_Y = 10;
+        public const int MISA_MIN_X = 0;
+        public const int MISA_MAX_X = 10000;
+        public const int MISA_Interval_X = 1000;//刻度线
+        public const double MISA_Interval_Y = 1;
+        /// <summary>
+        /// LeftMiddleRight坐标轴最值
+        /// </summary>
+        public const int LMR_MIN_Y = 0;
+        public const int LMR_MAX_Y = 230;
+        public const int LMR_MIN_X = 0;
+        public const int LMR_MAX_X = 10000;
+        public const int LMR_Interval_X = 1000;//刻度线
+        public const double LMR_Interval_Y = 30;
+
+
 
         //3D实时队列长度
         public const int QUEUE3D_LENGTH = 600;

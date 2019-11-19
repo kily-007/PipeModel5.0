@@ -18,10 +18,10 @@ namespace PipeModel
         /// </summary>
         /// <param name="list"></param>
         /// <param name="count"></param>
-        public static void MisalignedAnalizeData(List<int[]> datas,double k)
+        public static double[] MisalignedAnalizeData(List<int[]> datas,double k)
         {
             if (datas.Count <= 0)
-                return;
+                return null;
             List<int[]> MisaX = new List<int[]>();
             List<int[]> MisaY = new List<int[]>();
             List<int> MisaZ = new List<int>();
@@ -40,20 +40,17 @@ namespace PipeModel
                 middleSumy = 0;
                 rightSumy = 0;
 
-                //根据参数，自动补正数据
-                for (int j = leftTx; j < rightTx; j++)
-                {
-                    datas[i][j] -= (int)(k * (j-6));
-                }
-
-
                 
                 while (leftTx < rightTx && datas[i][leftTx] == Define.INVALID_DATA_ORIGINAL) leftTx++;
                 while (leftTx < rightTx && datas[i][rightTx] == Define.INVALID_DATA_ORIGINAL) rightTx--;
-                //while (leftTx < rightTx && Math.Abs(datas[i][leftTx] - datas[i][leftTx + 1]) < 3) leftTx++;
-                //while (leftTx < rightTx && Math.Abs(datas[i][rightTx] - datas[i][rightTx - 1]) < 3) rightTx--;
-                
-                if ( rightTx- leftTx <= 300)
+
+                //根据参数，自动补正数据
+                for (int j = leftTx; j <= rightTx; j++)
+                {
+                    datas[i][j] -= (int)(k * (j - 6));
+                }
+                //有效点的个数
+                if ( scanWidth(leftTx,rightTx,datas[i]))
                 {
                     int[] MisaXArra = new int[2] { 0, 0 };
                     MisaX.Add(MisaXArra);
@@ -76,11 +73,35 @@ namespace PipeModel
                     int[] MisaYArray = new int[3] { leftSumy / 10, middleSumy / 10, rightSumy / 10 };
                     MisaY.Add(MisaYArray);
                     MisaZ.Add(0);
+
                 }
                 
             }
             MysqlConnection.executeInsert(MisaX, MisaY, MisaZ, "S");
+            double[] rs = new double[4] {(MisaY[100][0]+ MisaY[100][2])/2 - MisaY[100][1], MisaX[0][0], MisaY[100][1], MisaX[0][1] };//misa，left，Middle，Right
+            return rs;
+            //return MisaY[100][1];
         }
-        
+
+        //判断宽度小于300，则为缝隙
+        private static bool scanWidth(int left,int right,int[] data)
+        {
+            if (right - left < 300)//宽度小于300
+            {
+                return true;
+            }
+            else
+            {
+                int cout = 0;
+                for (int i = left; i < right; i++)
+                {
+                    if (data[i] != 0)
+                        cout++;
+                }
+                if (cout < 300)
+                    return true;
+            }
+            return false;
+        }
     }
 }

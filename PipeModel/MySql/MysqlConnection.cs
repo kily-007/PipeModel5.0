@@ -407,6 +407,41 @@ namespace PipeModel
         }
 
 
+        /// <summary>
+        /// 查询
+        /// </summary>
+        /// <param name="SQLString"></param>
+        /// <returns></returns>
+        public static object[,] executeQuery_2data(string sqlstr)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connetStr))
+                {
+                    DataSet ds = new DataSet();
+                    using (MySqlDataAdapter command = new MySqlDataAdapter(sqlstr, connection))
+                    {
+                        command.Fill(ds, "ds");
+                    }
+                    object[,] str = new object[ds.Tables[0].Rows.Count, ds.Tables[0].Columns.Count];
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        for (int j = 0; j < ds.Tables[0].Columns.Count; j++)
+                        {
+                            str[i,j] = ds.Tables[0].Rows[i][j].ToString();
+                        }
+                    }
+                    return str;
+                }
+            }
+            catch (MySqlException ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+
         /// <summary> 
         /// 获取时间戳 
         /// </summary> 
